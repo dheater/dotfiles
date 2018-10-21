@@ -1,0 +1,23 @@
+[user]
+    email = daniel@heatertech.com
+    name = Daniel Heater
+[alias]
+    co = checkout
+    ci = commit
+    st = status -s
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+[color]
+	ui = auto
+[core]
+	exludesfile = /home/dheater/.gitignore_global
+	excludesfile = /home/dheater/.gitignore_global
+	autocrlf = input
+[push]
+	default = matching
+[url "git@gitlab.bit9.local:"]
+	insteadOf = https://gitlab.bit9.local
+[url "git@gitlab.bit9.local:"]
+	insteadOf = http://gitlab.bit9.local

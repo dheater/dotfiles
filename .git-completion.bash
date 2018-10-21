@@ -1,0 +1,1 @@
+homedir/.git-completion.bash
