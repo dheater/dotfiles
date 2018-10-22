@@ -7,7 +7,7 @@ cat .ssh/id_rsa.pub
 
 # Clone the dotfiles
 git init
-git remote add git@github.com:dheater/dotfiles.git
+git remote add origin git@github.com:dheater/dotfiles.git
 git fetch origin
 
 # Remove the local copy
