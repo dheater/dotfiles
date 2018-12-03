@@ -83,6 +83,7 @@ alias vi='vim'
 alias gitlog='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 alias get='git '
 alias logout='gnome-session-quit'
+alias v='vagrant'
 
 #alias sudo='dzdo'
 
