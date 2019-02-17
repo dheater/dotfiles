@@ -6,16 +6,14 @@ ssh-keygen -t rsa
 cat .ssh/id_rsa.pub
 
 # Clone the dotfiles
-git init
-git remote add origin git@github.com:dheater/dotfiles.git
-git fetch origin
+git clone git@github.com:dheater/dotfiles.git
 
-# Remove the local copy
+# Remove the bashrc
 rm .bashrc
 
-# Switch to the git versions.
-git checkout master
-source .bashrc
+# Intiallize the dotfiles
+cd dotfiles
+./install
 
 # Setup Vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
