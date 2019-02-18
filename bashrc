@@ -57,18 +57,19 @@ P="\[\033[0m\]" # Neutral
 #alias tmux="tmux -2"
 
 # Prompt
+[[ -z "$SSH_CLIENT" ]] && PROMPT_COLOR=$C6 || PROMPT_COLOR=$C3
 if [ -e ~/.git-prompt.sh ]; then
-	. ~/.git-prompt.sh
-   export PS1="$P$C6\u@\h $C10:\w$P$C8\$(__git_ps1)
+    . ~/.git-prompt.sh
+    export PS1="$P$PROMPT_COLOR\u@\h $C10:\w$P$C8\$(__git_ps1)
 $C16$ "
 else
-   export PS1="$P$C6\u@\h $C10:\w$P$C8
+    export PS1="$P$PROMPT_COLOR\u@\h $C10:\w$P$C8
 $C16$ "
 fi
 
 # Git autocomplete
 if [ -e ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+    . ~/.git-completion.bash
 fi
 
 # Environment variables
