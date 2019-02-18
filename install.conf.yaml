@@ -1,0 +1,21 @@
+[
+    {
+        "shell": [
+            ["git submodule update --init --recursive",
+                "Installing submodules"]
+        ]
+    },
+    {
+        "link": {
+            "~/.bashrc": "bashrc",
+            "~/.clang-format": "clang-format",
+            "~/.git-completion.bash": "git-completion.bash",
+            "~/.gitconfig": "gitconfig",
+            "~/.gitignore": "gitignore",
+            "~/.git-prompt.sh": "git-prompt.sh",
+            "~/.inputrc": "inputrc",
+            "~/.tmux.conf": "tmux.conf",
+            "~/.vimrc": "vimrc"
+        }
+    }
+]
