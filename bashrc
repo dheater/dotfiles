@@ -57,7 +57,7 @@ P="\[\033[0m\]" # Neutral
 #alias tmux="tmux -2"
 
 # Prompt
-if [ -f ~/.git-prompt.sh ]; then
+if [ -e ~/.git-prompt.sh ]; then
 	. ~/.git-prompt.sh
    export PS1="$P$C6\u@\h $C10:\w$P$C8\$(__git_ps1)
 $C16$ "
@@ -67,7 +67,7 @@ $C16$ "
 fi
 
 # Git autocomplete
-if [ -f ~/.git-completion.bash ]; then
+if [ -e ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
