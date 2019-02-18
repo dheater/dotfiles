@@ -86,8 +86,6 @@ alias get='git '
 alias logout='gnome-session-quit'
 alias v='vagrant'
 
-#alias sudo='dzdo'
-
 export PATH=$PATH:$HOME/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin:.
 
 export GIT_PAGER='less -FRXK'
@@ -107,3 +105,7 @@ else
 fi
 unset __conda_setup
 # <<< conda init <<<
+
+# Golang stuff
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:GOPATH/bin
