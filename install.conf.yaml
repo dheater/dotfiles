@@ -11,7 +11,6 @@
             "~/.clang-format": "clang-format",
             "~/.git-completion.bash": "git-completion.bash",
             "~/.gitconfig": "gitconfig",
-            "~/.gitignore": "gitignore",
             "~/.git-prompt.sh": "git-prompt.sh",
             "~/.inputrc": "inputrc",
             "~/.tmux.conf": "tmux.conf",
