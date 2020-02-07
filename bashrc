@@ -84,18 +84,8 @@ alias vi='vim'
 alias gitlog='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 alias get='git '
 alias logout='gnome-session-quit'
-alias v='vagrant'
 
-export PATH=$PATH:$HOME/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin:.
+export PATH=$PATH:$HOME/.local/bin:.
 
 export GIT_PAGER='less -FRXK'
-
-# Golang stuff
-export GOPATH=$(go env GOPATH)
-export PATH=$PATH:GOPATH/bin
-
-# Exercism
-if [ -f ~/.config/exercism/exercism_completion.bash ]; then
-    source ~/.config/exercism/exercism_completion.bash
-fi
 
