@@ -7,6 +7,7 @@
     },
     {
         "link": {
+            "~/.zshrc": "zshrc",
             "~/.bashrc": "bashrc",
             "~/.clang-format": "clang-format",
             "~/.git-completion.bash": "git-completion.bash",
