@@ -1,12 +1,12 @@
-#export HOMEBREW_TEMP=~/reno/tmp
-#export PATH=$PATH:~/reno/homebrew/bin
-
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-15.jdk/Contents/Home
 
 # Make globbing case insenstive
 setopt NO_CASE_GLOB
 # and make it work like bash
 setopt GLOB_COMPLETE
+
+# Use vi mode
+bindkey -v
 
 # If I type a directory name without `cd ` pretend I said `cd `
 setopt AUTO_CD
@@ -50,3 +50,10 @@ setopt prompt_subst
 RPROMPT=\$vcs_info_msg_0_
 zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
 zstyle ':vcs_info:*' enable git
+
+# Load Git completion
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+fpath=(~/.zsh $fpath)
+
+autoload -Uz compinit && compinit
+
