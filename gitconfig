@@ -21,3 +21,5 @@
 	insteadOf = https://gitlab.bit9.local
 [url "git@gitlab.bit9.local:"]
 	insteadOf = http://gitlab.bit9.local
+[pull]
+	rebase = false
