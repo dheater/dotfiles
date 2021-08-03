@@ -15,8 +15,8 @@ SAVEHIST=5000
 HISTSIZE=2000
 # store times in history
 setopt EXTENDED_HISTORY
-# share history across multiple zsh sessions
-setopt SHARE_HISTORY
+# Do not share history across multiple zsh sessions
+setopt nosharehistory
 # append to history
 setopt APPEND_HISTORY
 # adds commands as they are typed, not at shell exit
