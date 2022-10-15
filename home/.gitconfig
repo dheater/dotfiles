@@ -1,0 +1,13 @@
+# This is Git's per-user configuration file.
+[user]
+name = Daniel Heater
+email = daniel@heatertech.com
+
+[alias]
+    co = checkout
+    ci = commit
+    st = status -s
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
