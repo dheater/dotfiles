@@ -3,6 +3,9 @@
 name = Daniel Heater
 email = daniel@heatertech.com
 
+[includeIf "gitdir:~/src-imprivata/"]
+    path = ~/src=imprivata/.gitconfig
+	
 [alias]
     co = checkout
     ci = commit
