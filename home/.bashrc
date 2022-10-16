@@ -17,28 +17,6 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=2000
 HISTFILESIZE=2000
-# store times in history
-#setopt EXTENDED_HISTORY
-# Do not share history across multiple zsh sessions
-#setopt nosharehistory
-# append to history
-setopt APPEND_HISTORY
-# adds commands as they are typed, not at shell exit
-#setopt INC_APPEND_HISTORY
-# expire duplicates first
-setopt HIST_EXPIRE_DUPS_FIRST 
-# do not store duplications
-setopt HIST_IGNORE_DUPS
-#ignore duplicates when searching
-setopt HIST_FIND_NO_DUPS
-# removes blank lines from history
-setopt HIST_REDUCE_BLANKS
-# verify we are substituting the command we expect on ! (bang)
-setopt HIST_VERIFY
-
-# Fix my typos
-setopt CORRECT
-setopt CORRECT_ALL
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.

@@ -2,6 +2,7 @@
 [user]
 name = Daniel Heater
 email = daniel@heatertech.com
+	signingkey = 521B457B3E93EB01D8D08F883D143B85DC45E9B0
 
 [includeIf "gitdir:~/src-imprivata/"]
     path = ~/src=imprivata/.gitconfig
@@ -25,6 +26,6 @@ email = daniel@heatertech.com
 [pull]
 	rebase = false
 [commit]
-	gpgSign = true
+	gpgsign = true
 [tag]
 	gpgSign = true
