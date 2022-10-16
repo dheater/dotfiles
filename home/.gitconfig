@@ -11,3 +11,17 @@ email = daniel@heatertech.com
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     type = cat-file -t
     dump = cat-file -p
+[color]
+	ui = auto
+[core]
+	exludesfile = home/dheater/.gitignore_global
+	excludesfile = /home/dheater/.gitignore_global
+	autocrlf = input
+[push]
+	default = matching
+[pull]
+	rebase = false
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true

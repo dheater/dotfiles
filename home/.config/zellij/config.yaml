@@ -1,7 +1,6 @@
 ---
 simplified_ui: false
 pane_frames: false
-default_shell: nu
 
 theme: tokyo-night
 
