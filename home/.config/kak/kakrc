@@ -1,0 +1,12 @@
+add-highlighter global/ number-lines -relative
+
+# Use spaces instead of tabs
+hook global InsertChar \t %{ exec -draft -itersel h@ }
+set global tabstop 4
+set global indentwidth 4                                                    
+
+# For tab completion
+hook global InsertCompletionShow .* %{
+    map window insert <tab> <c-n>
+    map window insert <s-tab> <c-p>
+}
