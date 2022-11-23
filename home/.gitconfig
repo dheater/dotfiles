@@ -1,12 +1,19 @@
-# This is Git's per-user configuration file.
+# Setting up git for multiple accounts
+# https://markentier.tech/posts/2021/02/github-with-multiple-profiles-gpg-ssh-keys/
+
 [user]
-name = Daniel Heater
-email = daniel@heatertech.com
-	signingkey = 521B457B3E93EB01D8D08F883D143B85DC45E9B0
+	name = Daniel Heater
+	useConfigOnly = true
+
+[includeIf "gitdir:~/src-dheater/"]
+	path = ~/.gitconfig-dheater
+
+[includeIf "gitdir:~/.homesick/"]
+	path = ~/.gitconfig-dheater
 
 [includeIf "gitdir:~/src-imprivata/"]
-    path = ~/src=imprivata/.gitconfig
-	
+	path = ~/.gitconfig-imprivata
+
 [alias]
     co = checkout
     ci = commit
@@ -18,7 +25,6 @@ email = daniel@heatertech.com
 [color]
 	ui = auto
 [core]
-	exludesfile = home/dheater/.gitignore_global
 	excludesfile = /home/dheater/.gitignore_global
 	autocrlf = input
 [push]

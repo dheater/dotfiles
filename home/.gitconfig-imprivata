@@ -1,0 +1,6 @@
+[user]
+	email = daniel.heater@imprivata.com
+	signingKey=6A842F28
+	
+[url "git@github.com-work"]
+	insteadOf = git@github.com 
