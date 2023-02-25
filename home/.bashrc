@@ -5,6 +5,9 @@ case $- in
       *) return;;
 esac
 
+# Use vi mode
+set -o vi
+
 export EDITOR="/home/dheater/.cargo/bin/hx"
 
 # don't put duplicate lines or lines starting with space in the history.
