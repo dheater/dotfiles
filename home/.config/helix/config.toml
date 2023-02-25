@@ -1,3 +1,4 @@
 theme = "pop-dark"
 editor.true-color = true
 editor.indent-guides.render = true
+editor.line-number = "relative"
