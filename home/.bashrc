@@ -1,6 +1,3 @@
-# vi mode
-set -o vi
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;

@@ -3,4 +3,7 @@
 	
 [user]
 	email = daniel@heatertech.com
-	signingKey=6A842F28
+
+[include]
+	path = ~/.gitconfig-dheater-key
+
