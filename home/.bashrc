@@ -1,3 +1,5 @@
+# vi mode
+set -o vi
 
 # If not running interactively, don't do anything
 case $- in
@@ -108,6 +110,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+eval "$(zoxide init bash)"
+
 export PATH="$HOME/.local/bin:/opt/zls:/opt/zig:$PATH"
 
 # enable programmable completion features (you don't need to enable
@@ -125,8 +129,10 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
 homeshick --quiet refresh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
