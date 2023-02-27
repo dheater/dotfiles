@@ -1,11 +1,11 @@
-# vi mode
-set -o vi
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
+
+# Use vi mode
+set -o vi
 
 export EDITOR="/home/dheater/.cargo/bin/hx"
 
