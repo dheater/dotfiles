@@ -4,31 +4,9 @@ curl -L https://nixos.org/nix/install | sh && nix-daemon &
 # source nix
 . ~/.nix-profile/etc/profile.d/nix.sh
 
-# install packages
-nix-env -iA \
-  nixpkgs.antibody \
-  nixpkgs.bat \
-  nixpkgs.direnv \
-  nixpkgs.delta \
-  nixpkgs.exa \
-  nixpkgs.fzf \
-  nixpkgs.fd \
-  nixpkgs.git \
-  nixpkgs.helix \
-  nixpkgs.jq \
-  nixpkgs.openssh \
-  nixpkgs.ripgrep \
-  nixpkgs.stow \
-  nixpkgs.tmux \
-  nixpkgs.unzip \
-  nixpkgs.vim \
-  nixpkgs.wget \
-  nixpkgs.zellij \
-  nixpkgs.zoxide \
-  nixpkgs.zsh \
-  
 # stow dotfiles
-stow alacrity
+stow alacritty
+stow fzf
 stow git
 stow helix
 stow p10k
