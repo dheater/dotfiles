@@ -5,15 +5,7 @@
 	name = dheater
 	useConfigOnly = true
 	email = daniel@heatertech.com
-
-[includeIf "gitdir:~/src-dheater/"]
-	path = ~/.gitconfig-dheater
-
-[includeIf "gitdir:~/.homesick/"]
-	path = ~/.gitconfig-dheater
-
-[includeIf "gitdir:~/src-imprivata/"]
-	path = ~/.gitconfig-imprivata
+	signingkey = ~/.ssh/id_ed25519.pub
 
 [alias]
     co = checkout
@@ -23,6 +15,14 @@
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     type = cat-file -t
     dump = cat-file -p
+
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+
 [color]
 	ui = auto
 [core]
@@ -33,21 +33,14 @@
 	default = matching
 [pull]
 	rebase = false
-[commit]
-	gpgsign = true
-[tag]
-	gpgSign = true
-
 [interactive]
   diffFilter = delta --color-only --features=interactive
 
 [delta]
   features = decorations
- navigate = true
-
+  navigate = true
 [delta "interactive"]
   keep-plus-minus-markers = false
-
 [delta "decorations"]
     commit-decoration-style = blue ol
     commit-style = raw
