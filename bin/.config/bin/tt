@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# Thanks Josh! https://www.youtube.com/watch?v=l_TTxc0AcCw
+
+# if not currently in tmux
+if [ -z "$TMUX" ]; then
+  # tmux is not active
+  ZOXIDE_RESULT=$(zoxide query -l | fzf --reverse)
+
+  # if result is empty, exit
+  if [ -z "$ZOXIDE_RESULT" ]; then
+    exit 0
+  fi
+
+  FOLDER=$(basename $ZOXIDE_RESULT)
+
+  # lookup tmux session name
+  SESSION=$(tmux list-sessions | grep $FOLDER | awk '{print $1}')
+  SESSION=${SESSION//:/}
+  echo $SESSION
+
+  if [ -z "$SESSION" ]; then
+    # session does not exist, jump to the directory
+    cd $ZOXIDE_RESULT
+    # create a session
+    tmux new-session -s $FOLDER
+  else
+    # session exists
+    tmux attach -t $SESSION
+  fi
+else 
+  # tmux is active
+  ZOXIDE_RESULT=$(zoxide query -l | fzf --reverse)
+
+  # if result is empty, exit
+  if [ -z "$ZOXIDE_RESULT" ]; then
+    exit 0
+  fi
+
+  FOLDER=$(basename $ZOXIDE_RESULT)
+
+  # lookup tmux session name
+  SESSION=$(tmux list-sessions | grep $FOLDER | awk '{print $1}')
+  SESSION=${SESSION//:/}
+
+  if [ -z "$SESSION" ]; then
+    # session does not exist, jump to the directory
+    cd $ZOXIDE_RESULT
+    # create a session
+    tmux new-session -d -s $FOLDER
+    # attach to session
+    tmux switch-client -t $FOLDER
+  else
+    # session exists
+    tmux switch-client -t $SESSION
+  fi
+fi  

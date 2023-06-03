@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "svelte-language-server": "^0.15.9",
+    "vscode-html-languageservice": "^5.0.5"
+  }
+}

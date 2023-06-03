@@ -1,5 +1,5 @@
 # install nix
-curl -L https://nixos.org/nix/install | sh
+curl -L https://nixos.org/nix/install | sh && nix-daemon &
 
 # source nix
 . ~/.nix-profile/etc/profile.d/nix.sh
@@ -11,6 +11,7 @@ nix-env -iA \
   nixpkgs.direnv \
   nixpkgs.exa \
   nixpkgs.fzf \
+  nixpkgs.fd \
   nixpkgs.git \
   nixpkgs.helix \
   nixpkgs.jq \
@@ -26,8 +27,11 @@ nix-env -iA \
   nixpkgs.zsh \
   
 # stow dotfiles
+stow alacrity
 stow git
-stow tmux
+stow helix
+stow p10k
+stow zellij
 stow zsh
 
 # add zsh as a login shell
