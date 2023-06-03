@@ -9,6 +9,7 @@ nix-env -iA \
   nixpkgs.antibody \
   nixpkgs.bat \
   nixpkgs.direnv \
+  nixpkgs.delta \
   nixpkgs.exa \
   nixpkgs.fzf \
   nixpkgs.fd \
