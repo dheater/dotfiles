@@ -1,0 +1,7 @@
+ohmyzsh/oh-my-zsh path:plugins/command-not-found
+
+romkatv/powerlevel10k
+
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+zsh-users/zsh-syntax-highlighting

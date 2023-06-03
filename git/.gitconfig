@@ -1,0 +1,67 @@
+# Setting up git for multiple accounts
+# https://markentier.tech/posts/2021/02/github-with-multiple-profiles-gpg-ssh-keys/
+
+[user]
+	name = dheater
+	useConfigOnly = true
+	email = daniel@heatertech.com
+
+[includeIf "gitdir:~/src-dheater/"]
+	path = ~/.gitconfig-dheater
+
+[includeIf "gitdir:~/.homesick/"]
+	path = ~/.gitconfig-dheater
+
+[includeIf "gitdir:~/src-imprivata/"]
+	path = ~/.gitconfig-imprivata
+
+[alias]
+    co = checkout
+    ci = commit
+    st = status -s
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+[color]
+	ui = auto
+[core]
+	excludesFile = ~/.gitignore
+	autocrlf = false
+	pager = delta
+[push]
+	default = matching
+[pull]
+	rebase = false
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[delta]
+  features = decorations
+ navigate = true
+
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+
+[diff]
+	tool = vimdiff
+	colorMoved = default
+[difftool]
+	prompt = false
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3

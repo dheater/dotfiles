@@ -1,5 +1,8 @@
 # Set up a new machine
 
+This is where I store files to be synched between machines.
+Much of this is thanks to [Jake Weisler's videos here](https://www.youtube.com/watch?v=70YMTHAZyy4&list=PL1C97G3GhlHdANMFUIXTcFr14R7b7EBj9&pp=iAQB)
+
 ## Set up SSH keys
 
 ```
@@ -9,18 +12,6 @@ ssh-keygen -t rsa
 cat .ssh/id_rsa.pub
 ```
 
-## Intiallize the dotfiles
+## Set up a new environment
 
-Install `chezmoi`: https://www.chezmoi.io
-
-Run `$ chezmoi init --apply https://github.com/username/dotfiles.git` to do a straght install or lool at the instructions as [Chezmoi](https://www.chezmoi.io) for other setup options.
-
-## Setup Vim
-
-Install `vim`
-
-Then pull in the plugins using [Vundle](https://github.com/VundleVim/Vundle.vim)
-```
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall
-```
+Just run the `install.sh` script
