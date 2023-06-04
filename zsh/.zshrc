@@ -60,7 +60,7 @@ alias ls='exa -a'
 alias nixup='NIXPKGS_ALLOW_BROKEN=1 nix-env -irf ~/dotfiles/packages.nix'
 
 # Path
-export PATH=$PATH:$HOME/bin:$HOME/.config/bin:$HOME/.config/emacs/bin
+export PATH=$PATH:$HOME/dotfiles/bin
 
 # Setup zoxide
 eval "$(zoxide init zsh)"
