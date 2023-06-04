@@ -6,11 +6,12 @@ with import <nixpkgs> {}; [
   direnv
   dos2unix
   exa
-  fzf
   fd
+  fzf
   git
   helix
   jq
+  nix
   openssh
   ripgrep
   stow
