@@ -15,8 +15,7 @@ if [ -z "$TMUX" ]; then
   FOLDER=$(basename $ZOXIDE_RESULT)
 
   # lookup tmux session name
-  SESSION=$(tmux list-sessions | grep $FOLDER | awk '{print $1}')
-  SESSION=${SESSION//:/}
+  SESSION=$(tmux list-sessions 2>/dev/null | grep $FOLDER | awk '{print $1}')
   echo $SESSION
 
   if [ -z "$SESSION" ]; then
@@ -26,6 +25,7 @@ if [ -z "$TMUX" ]; then
     tmux new-session -s $FOLDER
   else
     # session exists
+    SESSION=${SESSION//:/}
     tmux attach -t $SESSION
   fi
 else 
