@@ -7,11 +7,18 @@ Much of this is thanks to [Jake Weisler's videos here](https://www.youtube.com/w
 
 ```
 # Generate your ssh key
-ssh-keygen -t rsa
+ssh-keygen -t ed25519
 # Copy the key to Github
-cat .ssh/id_rsa.pub
+cat .ssh/id_ed25519.pub
 ```
 
-## Set up a new environment
+## Install nix
+Install nix (package manager) per https://nixos.org/download.html
 
-Just run the `install.sh` script
+## Setup profile
+Run the `setup.sh` script
+
+--- or ---
+From the `dotfiles` directory, run `nix-env -irf packages.nix` to install the default profile packages.
+
+From the `dotfiles` directory, run `stow <dir>` for each application config desired.

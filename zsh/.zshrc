@@ -62,9 +62,6 @@ alias nixup='NIXPKGS_ALLOW_BROKEN=1 nix-env -irf ~/dotfiles/packages.nix'
 # Path
 export PATH=$PATH:$HOME/dotfiles/bin
 
-# Setup zoxide
-eval "$(zoxide init zsh)"
-
 # fzf options
 export FZF_CTRL_R_OPTS="--reverse"
 export FZF_TMUX_OPTS="-p"
@@ -81,3 +78,7 @@ fi
 if [ -e /home/dheater/.nix-profile/etc/profile.d/nix.sh ]; then . /home/dheater/.nix-profile/etc/profile.d/nix.sh; fi
 
 eval "$(direnv hook zsh)"
+
+# Setup zoxide
+eval "$(zoxide init zsh)"
+
