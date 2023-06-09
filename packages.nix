@@ -1,5 +1,6 @@
 # Nix packages to install
 with import <nixpkgs> {}; [
+  alacritty
   antibody
   bat
   delta
