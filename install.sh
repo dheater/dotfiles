@@ -1,8 +1,13 @@
 # install nix
-curl -L https://nixos.org/nix/install | sh && nix-daemon &
+if [ ! -d "/nix" ]; then 
+	sh <(curl -L https://nixos.org/nix/install) --daemon
+fi
 
 # source nix
 . ~/.nix-profile/etc/profile.d/nix.sh
+
+# install packages
+nix-env -irf packages.nix
 
 # stow dotfiles
 stow alacritty
