@@ -82,3 +82,4 @@ eval "$(direnv hook zsh)"
 # Setup zoxide
 eval "$(zoxide init zsh)"
 
+cd
