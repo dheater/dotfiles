@@ -1,0 +1,8 @@
+[user]
+	name = dheater
+	useConfigOnly = true
+	email = daniel.heater@imprivata.com
+	signingkey = ~/.ssh/id-imprivata.pub
+	
+[url "git@github.com-imprivata"]
+	insteadOf = git@github.com

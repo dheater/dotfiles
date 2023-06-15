@@ -7,6 +7,9 @@
 	email = daniel@heatertech.com
 	signingkey = ~/.ssh/id_ed25519.pub
 
+[includeif "gitdir:~/src-imprivata/**"]
+	path = ~/src-imprivata/.gitconfig
+
 [alias]
     co = checkout
     ci = commit
