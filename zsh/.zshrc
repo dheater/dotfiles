@@ -62,6 +62,9 @@ alias nixup='NIXPKGS_ALLOW_BROKEN=1 nix-env -irf ~/dotfiles/packages.nix'
 # Path
 export PATH=$PATH:$HOME/dotfiles/bin
 
+# Git autocomplete
+autoload -Uz compinit && compinit
+
 # fzf options
 export FZF_CTRL_R_OPTS="--reverse"
 export FZF_TMUX_OPTS="-p"
