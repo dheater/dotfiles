@@ -4,7 +4,7 @@
 [user]
 	name = dheater
 	useConfigOnly = true
-	email = daniel@heatertech.com
+	email = daniel@heater.dev
 	signingkey = ~/.ssh/id_ed25519.pub
 
 [includeif "gitdir:~/src-imprivata/**"]
