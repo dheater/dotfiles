@@ -18,7 +18,7 @@ source ${HOME}/.zsh_plugins.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='hx'
+  export EDITOR='nvim'
 fi
 
 # Make globbing case insenstive
