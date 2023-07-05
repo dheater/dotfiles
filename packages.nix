@@ -10,10 +10,19 @@ with import <nixpkgs> {}; [
   fd
   fzf
   git
-  helix
+  go
+  jdk
   jq
+  lazygit
+  lua
+  luarocks
+  neovim
   nix
+  nodejs
   openssh
+  perl
+  php
+  python3
   ripgrep
   stow
   tmux
@@ -21,6 +30,7 @@ with import <nixpkgs> {}; [
   vim
   wget
   zellij
+  zig
   zoxide
   zsh
 ]

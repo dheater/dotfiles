@@ -6,6 +6,7 @@ stow alacritty
 stow fzf
 stow git
 stow helix
+stow nvim
 stow p10k
 stow zellij
 stow zsh
