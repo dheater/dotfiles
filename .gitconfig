@@ -1,0 +1,8 @@
+[user]
+	name = dheater
+	useConfigOnly = true
+	email = daniel@heater.dev
+	signingkey = ~/.ssh/id-dheater.pub
+	
+[url "git@github.com-dheater"]
+	insteadOf = git@github.com
