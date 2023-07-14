@@ -3,6 +3,7 @@ with import <nixpkgs> {}; [
   alacritty
   antibody
   bat
+  clang-tools
   delta
   direnv
   dos2unix
@@ -14,6 +15,7 @@ with import <nixpkgs> {}; [
   jq
   lazygit
   lua
+  lua-language-server
   luarocks
   neovim
   nix
@@ -23,6 +25,7 @@ with import <nixpkgs> {}; [
   php
   python3
   ripgrep
+  rust-analyzer
   stow
   tmux
   unzip
@@ -30,6 +33,7 @@ with import <nixpkgs> {}; [
   wget
   zellij
   zig
+  zls
   zoxide
   zsh
 ]
