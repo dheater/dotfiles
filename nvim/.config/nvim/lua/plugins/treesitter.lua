@@ -7,7 +7,7 @@ return {
         configs.setup({
             -- A list of parser names, or "all"
             ensure_installed = {
-                "c", "rust", "lua", "vim", "vimdoc", "query", "html", "markdown"
+                "c", "rust", "lua", "vim", "query", "html", "markdown"
             },
 
             -- Install parsers synchronously (only applied to `ensure_installed`)
