@@ -11,7 +11,6 @@ with import <nixpkgs> {}; [
   fzf
   git
   go
-  jdk
   jq
   lazygit
   lua

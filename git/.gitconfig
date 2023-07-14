@@ -7,6 +7,9 @@
 	email = daniel@heater.dev
 	signingkey = ~/.ssh/id-dheater.pub
 
+[includeif "gitdir:~/src-conan/**"]
+	path = ~/src-conan/.gitconfig
+
 [includeif "gitdir:~/src-imprivata/**"]
 	path = ~/src-imprivata/.gitconfig
 
