@@ -19,6 +19,7 @@ with import <nixpkgs> {}; [
   luarocks
   neovim
   nix
+  nodePackages_latest.svelte-language-server
   nodejs
   openssh
   perl
