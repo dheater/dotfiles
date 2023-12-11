@@ -38,6 +38,7 @@
 	excludesFile = ~/.gitignore
 	autocrlf = false
 	pager = delta
+	editor = hx
 [push]
 	default = matching
 [pull]
@@ -48,6 +49,7 @@
 [delta]
   features = decorations
   navigate = true
+  side-by-side = false
 [delta "interactive"]
   keep-plus-minus-markers = false
 [delta "decorations"]
