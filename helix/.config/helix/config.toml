@@ -1,4 +1,7 @@
-theme = "bogster"
+theme = "adwaita-dark"
 editor.true-color = true
-editor.indent-guides.render = true
 editor.line-number = "relative"
+editor.indent-guides.render = true
+editor.rulers = [80]
+editor.text-width = 80
+editor.soft-wrap.enable = true
