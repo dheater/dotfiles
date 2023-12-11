@@ -16,9 +16,9 @@ source ${HOME}/.zsh_plugins.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='vi'
 else
-  export EDITOR='nvim'
+  export EDITOR='hx'
 fi
 
 # Make globbing case insenstive
@@ -57,10 +57,11 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 alias ls='exa -a'
-alias nixup='NIXPKGS_ALLOW_BROKEN=1 nix-env -irf ~/dotfiles/packages.nix'
 
 # Path
-export PATH=$PATH:$HOME/dotfiles/bin
+export PATH=$PATH:$HOME/dotfiles/bin:/usr/local/sbin
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home
 
 # Git autocomplete
 autoload -Uz compinit && compinit
@@ -72,15 +73,6 @@ export FZF_TMUX_OPTS="-p"
 export PATH=$HOME/.cargo/bin:$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Nix
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
-
-if [ -e /home/dheater/.nix-profile/etc/profile.d/nix.sh ]; then . /home/dheater/.nix-profile/etc/profile.d/nix.sh; fi
-
-eval "$(direnv hook zsh)"
 
 # Setup zoxide
 eval "$(zoxide init zsh)"

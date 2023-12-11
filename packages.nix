@@ -1,9 +1,9 @@
 # Nix packages to install
 with import <nixpkgs> {}; [
-  alacritty
   antibody
   bat
   clang-tools
+  cmake
   delta
   direnv
   dos2unix
@@ -12,12 +12,13 @@ with import <nixpkgs> {}; [
   fzf
   git
   go
+  helix
   jq
   lazygit
   lua
   lua-language-server
   luarocks
-  neovim
+  ninja
   nix
   nodejs
   openssh
