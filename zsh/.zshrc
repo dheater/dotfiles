@@ -1,3 +1,7 @@
+# .zshrc
+source ~/.antidote/antidote.zsh
+antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -11,8 +15,6 @@ fi
 # export LANGUAGE=en_US.UTF-8
 # export LC_CTYPE=en_US.UTF-8
 # export LC_ALL=en_US.UTF-8
-
-source ${HOME}/.zsh_plugins.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
