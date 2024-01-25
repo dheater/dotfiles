@@ -2,10 +2,7 @@
 # https://markentier.tech/posts/2021/02/github-with-multiple-profiles-gpg-ssh-keys/
 
 [user]
-	name = dheater
 	useConfigOnly = true
-	email = daniel@heater.dev
-	signingkey = ~/.ssh/id-dheater.pub
 
 [includeif "gitdir:~/dotfiles/**"]
 	path = ~/dotfiles/.gitconfig
