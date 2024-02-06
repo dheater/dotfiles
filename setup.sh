@@ -4,7 +4,6 @@ stow fzf
 stow git
 stow helix
 stow jetbrains
-stow nvim
-stow p10k
+stow vim
 stow zellij
 stow zsh
