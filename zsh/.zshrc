@@ -79,4 +79,5 @@ export PATH=$HOME/.cargo/bin:$HOME/.config/tmux/plugins/t-smart-tmux-session-man
 # Setup zoxide
 eval "$(zoxide init zsh)"
 
-cd
+# Shortcuts for CoPilot CLI
+eval "$(github-copilot-cli alias -- "$0")"
