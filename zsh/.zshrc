@@ -20,7 +20,7 @@ fi
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vi'
 else
-  export EDITOR='hx'
+  export EDITOR='lvim'
 fi
 
 # Make globbing case insenstive
@@ -61,7 +61,7 @@ fi
 alias ls='exa -a'
 
 # Path
-export PATH=$PATH:$HOME/dotfiles/bin:/usr/local/sbin
+export PATH=$PATH:$HOME/dotfiles/bin:/usr/local/sbin:$HOME/zig:/opt/bin
 
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home
 
