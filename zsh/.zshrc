@@ -61,7 +61,7 @@ fi
 alias ls='exa -a'
 
 # Path
-export PATH=$PATH:$HOME/dotfiles/bin:/usr/local/sbin
+export PATH=$PATH:$$HOME/bin:HOME/dotfiles/bin:/usr/local/sbin
 
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home
 
