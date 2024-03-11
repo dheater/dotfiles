@@ -61,7 +61,7 @@ fi
 alias ls='eza -a'
 
 # Path
-export PATH=$PATH:$HOME/dotfiles/bin:/usr/local/sbin:$HOME/zig:/opt/bin:/opt/nvim
+export PATH=$PATH:$HOME/bin:$HOME/dotfiles/bin:/usr/local/sbin:$HOME/zig:/opt/bin:/opt/nvim
 
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home
 
