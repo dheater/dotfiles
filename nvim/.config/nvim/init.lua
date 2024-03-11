@@ -1,2 +1,1 @@
-require "dheater"
-require "lazy-setup"
+require("user")
