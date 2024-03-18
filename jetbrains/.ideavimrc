@@ -8,6 +8,8 @@ set showcmd
 set smartcase
 set incsearch
 set hlsearch
+set relativenumber
+set number
 
 set visualbell
 
@@ -15,7 +17,6 @@ set visualbell
 set clipboard+=unnamed   
 
 let mapleader = " "
-
 
 "" Plugin Settings
 "" ========================================================
@@ -28,7 +29,6 @@ set nerdtree
 " Easymotion settings
 set easymotion
 set notimeout
-
 
 "" Key mappings
 "" ========================================================
@@ -74,7 +74,7 @@ map <leader>c <action>(CommentByLineComment)
 map <leader>j <Plug>(easymotion-s)
 
 " Open NERDTree (use q to exit)
-map <leader>x :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 
 " Folding
 map <leader>zc :action CollapseAllRegions<CR>
@@ -123,8 +123,7 @@ set notimeout
 
 let g:WhichKey_ShowVimActions = "false"
 
-" LEADER_KEYS
-let mapleader = " "
+" Helix keybindings
 
 let g:WhichKeyDesc_Files = "<leader>f    Find in files"
 let g:WhichKeyDesc_Path = "<leader>/    Find in path"
@@ -151,7 +150,6 @@ let g:WhichKeyDesc_Paste = "<leader>p  Paste from clipboard"
 
 let g:WhichKeyDesc_GoToFileStart = "gg   Goto first line"
 let g:WhichKeyDesc_GoToEndOfFile = "ge   Goto last line"
-let g:WhichKeyDesc_GoToFilesInSelection = "gf   List open files"
 let g:WhichKeyDesc_GoToLineStart = "gh   Goto line start"
 let g:WhichKeyDesc_GoToLineEnd = "gl   Goto line end"
 let g:WhichKeyDesc_GoToFirstNonWhitespace = "gs   Goto first non-whitespace char"
