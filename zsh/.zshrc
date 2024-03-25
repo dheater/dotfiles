@@ -20,7 +20,7 @@ fi
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vi'
 else
-  export EDITOR='lvim'
+  export EDITOR='hx'
 fi
 
 # Make globbing case insenstive
@@ -79,3 +79,10 @@ eval "$(zoxide init zsh)"
 
 # Shortcuts for CoPilot CLI
 eval "$(github-copilot-cli alias -- "$0")"
+
+# bun completions
+[ -s "/home/dheater/.bun/_bun" ] && source "/home/dheater/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
