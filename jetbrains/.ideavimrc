@@ -23,7 +23,6 @@ let mapleader = " "
 
 set surround
 set highlightedyank
-set sneak
 set nerdtree
 
 " Easymotion settings
@@ -68,7 +67,7 @@ inoremap <C-k> <Action>(PopupMenu-selectPrev)
 map <leader>t :action ActivateTerminalToolWindow<CR>
 
 " Comment lines
-map <leader>c <action>(CommentByLineComment)
+map <C-c> <action>(CommentByLineComment)
 
 " Jump around with easymotion
 map <leader>j <Plug>(easymotion-s)
@@ -123,7 +122,6 @@ set notimeout
 
 let g:WhichKey_ShowVimActions = "false"
 
-" Helix keybindings
 
 let g:WhichKeyDesc_Files = "<leader>f    Find in files"
 let g:WhichKeyDesc_Path = "<leader>/    Find in path"
@@ -228,10 +226,10 @@ nnoremap <leader>wk       <C-w>k
 nnoremap <leader>wl          <C-w>l
 
 " Copy to clipboard
-vnoremap <leader>y "+y
+"vnoremap <leader>y "+y
 
 " Paste from clipboard
-vnoremap <leader>p "+p
+"vnoremap <leader>p "+p
 
 " Code actions
 nnoremap <leader>a :action ShowIntentionActions<cr>
@@ -242,10 +240,12 @@ map md <Plug>DSurround
 map mr <Plug>CSurround
 map ms <Plug>YSurround
 
-nnoremap d x
-vnoremap d :action EditorDelete<CR>
-nnoremap x V
-vnoremap x :action EditorDownWithSelection<CR>
+" Helix keybindings
+"nnoremap d x
+"vnoremap d :action EditorDelete<CR>
+"nnoremap x V
+"nnoremap x :action EditorDownWithSelection<CR>
+"vnoremap x :action EditorDownWithSelection<CR>
 nnoremap w :action EditorNextWordWithSelection<CR>
 vnoremap w <ESC>:action EditorNextWordWithSelection<CR>
 nnoremap b :action EditorPreviousWordWithSelection<CR>
@@ -332,7 +332,7 @@ nnoremap [m :action EditorCodeBlockStartWithSelection<CR>
 vnoremap [m :action EditorCodeBlockStartWithSelection<CR>
 
 " FIXME
-vnoremap %s :action SelectAllOccurrences<CR>
+"vnoremap %s :action SelectAllOccurrences<CR>
 
 nnoremap U <C-R>
 
@@ -342,3 +342,22 @@ nnoremap mam :action EditorMatchBrace<CR> :action EditorCodeBlockEndWithSelectio
 nnoremap maf :action MethodUp<CR> :action EditorCodeBlockEndWithSelection<CR>
 nnoremap mif :action MethodUp<CR> :action EditorCodeBlockEndWithSelection<CR>
 
+" Multiple cursors
+
+Plug 'terryma/vim-multiple-cursors'
+
+nmap C :action EditorCloneCaretBelow<CR>
+nmap <A-C> :action EditorCloneCaretAbove<CR>
+
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+xmap <S-C-n> <Plug>AllWholeOccurrences
+nmap g<S-C-n> <Plug>AllOccurrences
+xmap g<S-C-n> <Plug>AllOccurrences
+
+nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
+vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
