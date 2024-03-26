@@ -1,4 +1,4 @@
-theme = "adwaita-dark"
+theme = "dracula_at_night"
 
 [editor]
 true-color = true

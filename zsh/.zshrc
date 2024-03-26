@@ -18,9 +18,9 @@ fi
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vi'
+  export EDITOR=vi
 else
-  export EDITOR='hx'
+  export EDITOR='/usr/local/bin/hx'
 fi
 
 # Make globbing case insenstive
