@@ -4,7 +4,7 @@ local wezterm = require 'wezterm'
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
-config.color_scheme = 'Default (dark) (terminal.sexy)'
+config.color_scheme = 'Default dark (base16)'
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14
 
