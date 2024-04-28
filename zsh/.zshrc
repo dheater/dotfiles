@@ -86,3 +86,6 @@ eval "$(github-copilot-cli alias -- "$0")"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# helix-gpt
+export HANDLER=copilot
