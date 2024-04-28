@@ -7,6 +7,20 @@ args = ["--stdio"]
 language-id = "javascript"
 
 [[language]]
+name = "cpp"
+language-servers = [
+    "clangd",
+    "gpt"
+]
+
+[[language]]
+name = "rust"
+language-servers = [
+    "rust-analyzer",
+    "gpt"
+]
+
+[[language]]
 name = "typescript"
 language-servers = [
     "ts",
@@ -14,5 +28,9 @@ language-servers = [
 ]
 
 [[language]]
-name = "cpp"
+name = "zig"
+language-servers = [
+    "zig",
+    "gpt"
+]
 
