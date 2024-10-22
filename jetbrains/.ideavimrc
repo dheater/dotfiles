@@ -146,7 +146,7 @@ let g:WhichKeyDesc_FocusRight = "<leader>wl  Focus right window"
 let g:WhichKeyDesc_Copy = "<leader>y  Copy to clipboard"
 let g:WhichKeyDesc_Paste = "<leader>p  Paste from clipboard"
 
-let g:WhichKeyDesc_GoToFileStart = "gg   Goto first line"
+" let g:WhichKeyDesc_GoToFileStart = "gg   Goto first line"
 let g:WhichKeyDesc_GoToEndOfFile = "ge   Goto last line"
 let g:WhichKeyDesc_GoToLineStart = "gh   Goto line start"
 let g:WhichKeyDesc_GoToLineEnd = "gl   Goto line end"
@@ -254,7 +254,7 @@ vnoremap b <ESC>:action EditorPreviousWordWithSelection<CR>
 nnoremap <leader>r :action RenameElement<CR>
 
 " Go to line number <n> else start of file
-nnoremap gg :normal! gg<CR>
+" nnoremap gg :normal! gg<CR>
 
 " Go to the end of the file
 nnoremap ge G
