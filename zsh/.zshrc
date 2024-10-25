@@ -79,7 +79,7 @@ export PATH=$HOME/.cargo/bin:$HOME/.config/tmux/plugins/t-smart-tmux-session-man
 eval "$(zoxide init zsh)"
 
 # Shortcuts for CoPilot CLI
-eval "$(github-copilot-cli alias -- "$0")"
+# eval "$(github-copilot-cli alias -- "$0")"
 
 # bun completions
 [ -s "/home/dheater/.bun/_bun" ] && source "/home/dheater/.bun/_bun"
