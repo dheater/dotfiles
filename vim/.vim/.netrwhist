@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/dheater/src-imprivata/clients/filezilla-ftp-client/libfilezilla-0.47.0'
+let g:netrw_dirhist_3='/Users/dheater/src-imprivata/clients/fz/filezilla'
+let g:netrw_dirhist_2='/Users/dheater/src-imprivata/clients/filezilla-ftp-client'
+let g:netrw_dirhist_1='/Users/dheater/src-imprivata/clients/fz/filezilla'

@@ -62,7 +62,7 @@ fi
 alias ls='eza -a'
 
 # Path
-export PATH=$PATH:$HOME/bin:$HOME/dotfiles/bin:/usr/local/sbin:$HOME/zig:/opt/bin:/opt/nvim
+export PATH=$PATH:$HOME/bin:$HOME/dotfiles/bin:/usr/local/sbin:$HOME/zig:/opt/bin:/opt/nvim:/usr/local/go/bin
 
 # Git autocomplete
 autoload -Uz compinit && compinit
@@ -90,3 +90,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # helix-gpt
 export HANDLER=copilot
+

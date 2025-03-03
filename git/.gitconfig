@@ -40,8 +40,8 @@
 	default = matching
 [pull]
 	rebase = false
-[interactive]
-  diffFilter = delta --color-only --features=interactive
+# [interactive]
+  # diffFilter = delta --color-only --features=interactive
 
 [delta]
   features = decorations
@@ -59,12 +59,12 @@
     hunk-header-style = file line-number syntax
 
 [diff]
-	tool = vimdiff
+	tool = delta
 	colorMoved = default
 [difftool]
 	prompt = false
 [merge]
-	tool = vimdiff
+	tool = delta
 	conflictstyle = diff3
 [init]
 	defaultBranch = main
