@@ -13,6 +13,14 @@ language-servers = [
     "gpt"
 ]
 
+[linter]
+command = "clang-tidy"
+args = ["--quiet"]
+
+[formatter]
+command = "clang-format"
+args = ["--style=file"]
+
 [[language]]
 name = "rust"
 language-servers = [
