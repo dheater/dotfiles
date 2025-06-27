@@ -23,6 +23,8 @@ args = ["--style=file"]
 
 [[language]]
 name = "rust"
+auto-format = true
+formatter = { command = "rustfmt" }
 language-servers = [
     "rust-analyzer",
     "gpt"
