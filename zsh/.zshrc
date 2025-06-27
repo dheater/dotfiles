@@ -1,10 +1,13 @@
 # .zshrc
-source ~/.antidote/antidote.zsh
-antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
+# source ~/.antidote/antidote.zsh
+# antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 eval "$(direnv hook zsh)"
 
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -30,8 +33,7 @@ setopt NO_CASE_GLOB
 setopt GLOB_COMPLETE
 
 # Use vi mode
-bindkey -v
-# source ~/.zsh/plugins/zsh-vimto.zsh
+# bindkey -v
 
 SAVEHIST=5000
 HISTSIZE=2000
@@ -90,4 +92,12 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # helix-gpt
 export HANDLER=copilot
+
+
+# Devbox
+DEVBOX_NO_PROMPT=true
+autoload -U compinit; compinit
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
