@@ -24,7 +24,7 @@ fi
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR=vi
 else
-  export EDITOR='/usr/local/bin/hx'
+  export EDITOR=hx
 fi
 
 # Make globbing case insenstive

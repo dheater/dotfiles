@@ -4,8 +4,8 @@
 [user]
 	useConfigOnly = true
 	signingkey = /Users/dheater/.ssh/id_ed25519.pub
-	email = daniel.heater@imprivata.com
-	name = Daniel Heater
+	email = 112510548+daniel-heater-imprivata@users.noreply.github.com
+	name = daniel-heater-imprivata
 
 [includeif "gitdir:~/dotfiles/**"]
 	path = ~/dotfiles/.gitconfig
@@ -24,31 +24,36 @@
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     type = cat-file -t
     dump = cat-file -p
+
 [commit]
 	gpgsign = true
+
 [tag]
 	gpgsign = true
 
 [color]
 	ui = auto
+
 [core]
 	excludesFile = ~/.gitignore
 	autocrlf = false
 	pager = delta
 	editor = hx
+
 [push]
 	default = matching
+
 [pull]
 	rebase = false
-# [interactive]
-  # diffFilter = delta --color-only --features=interactive
 
 [delta]
   features = decorations
   navigate = true
   side-by-side = false
+
 [delta "interactive"]
   keep-plus-minus-markers = false
+
 [delta "decorations"]
     commit-decoration-style = blue ol
     commit-style = raw
@@ -59,14 +64,33 @@
     hunk-header-style = file line-number syntax
 
 [diff]
-	tool = delta
+	tool = bc
 	colorMoved = default
+
 [difftool]
 	prompt = false
+
+[difftool "bc"]
+	cmd = /usr/local/bin/bcomp "$LOCAL" "$REMOTE"
+
 [merge]
-	tool = delta
+	tool = bc
 	conflictstyle = diff3
+
+[mergetool]
+	prompt = false
+
+[mergetool "bc"]
+	cmd = /usr/local/bin/bcomp "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+	trustExitCode = true
+
 [init]
 	defaultBranch = main
+
 [gpg]
 	format = ssh
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
