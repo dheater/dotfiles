@@ -1,0 +1,7 @@
+{
+  "pragma once": {
+    "prefix": "once",
+    "body": ["#pragma once", "", ""],
+    "description": "header guard"
+  }
+}
