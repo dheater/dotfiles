@@ -1,94 +1,186 @@
-"" Base Settings
-"" ========================================================
+" Helix-style selection-first IdeaVim config
 
-set scrolloff=10
-set showmode
-set showcmd
-
-set smartcase
-set incsearch
-set hlsearch
-set relativenumber
-set number
-
-set visualbell
-
-" Use system clipboard
-set clipboard+=unnamed   
-
+" ========= Base / Plugins =========
+set scrolloff=10 showmode showcmd
+set smartcase incsearch hlsearch relativenumber number visualbell
+set clipboard+=unnamed
 let mapleader = " "
+set surround | set highlightedyank | set nerdtree | set easymotion
+set which-key | set notimeout
 
-"" Plugin Settings
-"" ========================================================
-
-set surround
-set highlightedyank
-set nerdtree
-
-" Easymotion settings
-set easymotion
-set notimeout
-
-"" Key mappings
-"" ========================================================
-
+" ========= QoL / Basic =========
 inoremap jj <Esc>
+" Make 'd' delete current character without yanking (more Helix-like)
+nnoremap d "_x
 
-" Tab navigation
-nnoremap <A-n> :tabnext<CR>
-nnoremap <A-p> :tabprev<CR>
+" Tabs / Panes
+nnoremap <A-n> :tabnext<CR> | nnoremap <A-p> :tabprev<CR>
+nnoremap <A-h> <C-w>h | nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k | nnoremap <A-l> <C-w>l
 
-" Pane navigation
-nnoremap <A-h> <C-w>h
-nnoremap <A-l> <C-w>l
-nnoremap <A-k> <C-w>k
-nnoremap <A-j> <C-w>j
-
-" Jump between methods
-nnoremap [[ <Action>(MethodUp)
-nnoremap ]] <Action>(MethodDown)
-
-" Easy visual indentation
-vnoremap < <gv
-vnoremap > >gv
-
-" Execute macro saved in 'q' register
-nnoremap qj @q
-
-" Popup navigation
+" Popup completion navigation
 inoremap <C-j> <Action>(PopupMenu-selectNext)
 inoremap <C-k> <Action>(PopupMenu-selectPrev)
 
+" ========= Selection-first motions (Helix-like) =========
+" Caret motions extend selection
+nnoremap h :action EditorLeft<CR>
+nnoremap l :action EditorRight<CR>
+nnoremap j :action EditorDown<CR>
+nnoremap k :action EditorUp<CR>
+nnoremap 0 :action EditorLineStart<CR>
+nnoremap ^ :action EditorLineStart<CR>
+nnoremap $ :action EditorLineEnd<CR>
+nnoremap gg :action EditorTextStart<CR>
+nnoremap G  :action EditorTextEnd<CR>
+nnoremap t v$h
 
-"" Leader commands
-"" ========================================================
+" Word motions extend selection
+nnoremap w :action EditorNextWordWithSelection<CR>
+nnoremap b :action EditorPreviousWordWithSelection<CR>
 
-" Goto terminal
+" Line bounds helpers
+nnoremap gh :action EditorLineStartWithSelection<CR>
+nnoremap gl :action EditorLineEndWithSelection<CR>
+nnoremap gs ^
+
+" Screen positions (top/center/bottom)
+nnoremap gt :action EditorMoveToPageTopWithSelection<CR>
+nnoremap gc :action EditorScrollToCenter<CR>
+nnoremap gb :action EditorMoveToPageBottomWithSelection<CR>
+
+" Word motions extend selection
+nnoremap w :action EditorNextWordWithSelection<CR>
+nnoremap b :action EditorPreviousWordWithSelection<CR>
+
+" Line bounds helpers
+nnoremap gh :action EditorLineStartWithSelection<CR>
+nnoremap gl :action EditorLineEndWithSelection<CR>
+nnoremap gs ^
+
+" Screen positions (top/center/bottom)
+nnoremap gt :action EditorMoveToPageTopWithSelection<CR>
+nnoremap gc :action EditorScrollToCenter<CR>
+nnoremap gb :action EditorMoveToPageBottomWithSelection<CR>
+
+" ========= Easy indentation / macros =========
+vnoremap < <gv
+vnoremap > >gv
+nnoremap qj @q
+
+" ========= Method navigation =========
+nnoremap [[ <Action>(MethodUp)
+nnoremap ]] <Action>(MethodDown)
+
+" ========= Matching / Surround =========
+nnoremap mm :action EditorMatchBrace<CR>
+vnoremap mm :action EditorMatchBrace<CR>
+
+unmap ds
+map md <Plug>DSurround
+map mr <Plug>CSurround
+map ms <Plug>YSurround
+
+" ========= Blocks / Structure (Helix [p ]p / [m ]m) =========
+nnoremap [p :action EditorCodeBlockStartWithSelection<CR>
+nnoremap ]p :action EditorCodeBlockEndWithSelection<CR>
+vnoremap [p :action EditorCodeBlockStartWithSelection<CR>
+vnoremap ]p :action EditorCodeBlockEndWithSelection<CR>
+nnoremap ]m :action EditorCodeBlockEndWithSelection<CR>
+vnoremap ]m :action EditorCodeBlockEndWithSelection<CR>
+nnoremap [m :action EditorCodeBlockStartWithSelection<CR>
+vnoremap [m :action EditorCodeBlockStartWithSelection<CR>
+
+" ========= Unimpaired-style =========
+" Functions
+nnoremap ]f :action MethodDown<CR>
+nnoremap [f :action MethodUp<CR>
+" VCS changes
+nnoremap ]g :action VcsShowNextChangeMarker<CR>
+nnoremap [g :action VcsShowPrevChangeMarker<CR>
+
+" Diagnostics (no ReSharper)
+nnoremap ]d :action GotoNextError<CR>
+nnoremap [d :action GotoPreviousError<CR>
+
+" ========= Search / Labeled jump =========
+" Select next/prev match (Helix multi-select feel)
+nnoremap n gn | nnoremap N gN
+vnoremap n <ESC>gn | vnoremap N <ESC>gN
+" f/t repeat like Helix Alt-. / Alt-,
+nnoremap <A-.> ;
+nnoremap <A-,> ,
+
+" EasyMotion labels for goto word
+nnoremap gw <Plug>(easymotion-s)
+
+" Diagnostics (no ReSharper)
+nnoremap ]d :action GotoNextError<CR>
+nnoremap [d :action GotoPreviousError<CR>
+
+" ========= Search / Labeled jump =========
+" Select next/prev match (Helix multi-select feel)
+nnoremap n gn | nnoremap N gN
+vnoremap n <ESC>gn | vnoremap N <ESC>gN
+" f/t repeat like Helix Alt-. / Alt-,
+nnoremap <A-.> ;
+nnoremap <A-,> ,
+" EasyMotion labels for goto word
+nnoremap gw <Plug>(easymotion-s)
+
+" ========= Goto / LSP =========
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gy :action GotoTypeDeclaration<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap g. :action JumpToLastChange<CR>
+" Recent buffer toggles / buffer nav
+nnoremap ga :b#<CR> | nnoremap gm :b#<CR>
+nnoremap gn :bnext<CR> | nnoremap gp :bprev<CR>
+" Select word (textobject-ish helper)
+nnoremap maw :action EditorSelectWord<CR>
+
+" ========= Space-mode (pickers / actions) =========
+nnoremap <leader>/ :action FindInPath<CR>
+nnoremap <leader>f :action GotoFile<CR>
+nnoremap <leader>b :action RecentFiles<CR>
+nnoremap <leader>s :action FileStructurePopup<CR>
+nnoremap <leader>S :action GotoSymbol<CR>
+nnoremap <leader>k :action QuickJavaDoc<CR>
+nnoremap <leader>a :action ShowIntentionActions<CR>
+nnoremap <leader>r :action RenameElement<CR>
+nnoremap <leader>d :action ActivateProblemsViewToolWindow<CR>
+
+" ========= Window mgmt (fixed conflicts) =========
+nnoremap <leader>wv :action SplitVertically<CR>
+nnoremap <leader>ws :action SplitHorizontally<CR>
+nnoremap <leader>wo :action CloseAllEditorsButActive<CR>
+nnoremap <leader>wq :action CloseAllEditors<CR>
+nnoremap <leader>wh <C-w>h | nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k | nnoremap <leader>wl <C-w>l
+
+" ========= Terminal / Tools / Git =========
 map <leader>t :action ActivateTerminalToolWindow<CR>
-
-" Comment lines
 map <C-c> <action>(CommentByLineComment)
 
-" Jump around with easymotion
+" EasyMotion quick-jump
 map <leader>j <Plug>(easymotion-s)
 
-" Open NERDTree (use q to exit)
+" NERDTree (q to close)
 map <leader>n :NERDTreeToggle<CR>
 
 " Folding
 map <leader>zc :action CollapseAllRegions<CR>
 map <leader>zo :action ExpandAllRegions<CR>
 
-" Display options
+" Display toggles
 map <leader>dd <action>(ToggleDistractionFreeMode)
 map <leader>dz <action>(ToggleZenMode)
 map <leader>df <action>(ToggleFullScreen)
 
-" Actions
+" Refactoring quicklist / actions
 map <leader>am <action>(ShowIntentionActions)
 map <leader>as <action>(SearchEverywhere)
-
-" Refactoring
 map <leader>rn <Action>(RenameElement)
 map <leader>rm <Action>(ExtractMethod)
 map <leader>rv <Action>(IntroduceVariable)
@@ -96,268 +188,38 @@ map <leader>rf <Action>(IntroduceField)
 map <leader>rs <Action>(ChangeSignature)
 map <leader>rr <Action>(Refactorings.QuickListPopupAction)
 
-" Go to code
-nmap <leader>gd <Action>(GotoDeclaration)
-nmap <leader>gy <Action>(GotoTypeDeclaration)
-nmap <leader>gi <Action>(GotoImplementation)
-nmap <leader>gu <Action>(ShowUsages)
-nmap <leader>gt <Action>(GotoTest)
-nmap <leader>gf <Action>(Back)
-nmap <leader>gb <Action>(Forward)
-
 " Git windows
 map <leader>gc <Action>(CheckinProject)
 map <leader>gs <Action>(ActivateVersionControlToolWindow)
 map <leader>gb <Action>(Git.Branches)
 
-" Errors
-map <leader>en <Action>(ReSharperGotoNextErrorInSolution)
-map <leader>ep <Action>(ReSharperGotoPrevErrorInSolution)
+" Diagnostics leaders (core IDE)
+nnoremap <leader>en :action GotoNextError<CR>
+nnoremap <leader>ep :action GotoPreviousError<CR>
 
+" ========= Multi-line / Multi-caret editing =========
+" Clone carets
+nnoremap C :action EditorCloneCaretBelow<CR>
+nnoremap <A-C> :action EditorCloneCaretAbove<CR>
+" Select next/prev/all occurrences (native)
+nnoremap <C-n> :action SelectNextOccurrence<CR>
+nnoremap g<C-p> :action UnselectPreviousOccurrence<CR>
+nnoremap g<S-C-n> :action SelectAllOccurrences<CR>
 
-" Enable which-key extension
-set which-key
-" Disable which-key timeout, i.e. show the menu until you press a key
-set notimeout
+" Expand / shrink selection (Helix Alt-o / Alt-i feel)
+nnoremap <A-o> :action EditorSelectWord<CR>
+nnoremap <A-i> :action EditorUnSelectWord<CR>
+vnoremap <A-o> :action EditorSelectWord<CR>
+vnoremap <A-i> :action EditorUnSelectWord<CR>
 
-let g:WhichKey_ShowVimActions = "false"
-
-
-let g:WhichKeyDesc_Files = "<leader>f    Find in files"
-let g:WhichKeyDesc_Path = "<leader>/    Find in path"
-let g:WhichKeyDesc_Windows = "<leader>w    Windows"
-let g:WhichKeyDesc_Recent = "<leader>b    Recent files"
-let g:WhichKeyDesc_Action = "<leader>a    Perform code action"
-let g:WhichKeyDesc_Diag = "<leader>d    Open diagnostics picker"
-
-" Window movement
-let g:WhichKeyDesc_SplitVert = "<leader>wv  Split vertically"
-let g:WhichKeyDesc_SplitHorz = "<leader>ws  Split horizontally"
-let g:WhichKeyDesc_CloseAll = "<leader>wq   Close all editors"
-let g:WhichKeyDesc_CloseOther = "<leader>wo  Close other editors"
-
-" Focus window
-let g:WhichKeyDesc_FocusLeft = "<leader>wh  Focus left window"
-let g:WhichKeyDesc_FocusDown = "<leader>wj  Focus down window"
-let g:WhichKeyDesc_FocusUp = "<leader>wk    Focus up window"
-let g:WhichKeyDesc_FocusRight = "<leader>wl  Focus right window"
-
-" Clipboard operations
-let g:WhichKeyDesc_Copy = "<leader>y  Copy to clipboard"
-let g:WhichKeyDesc_Paste = "<leader>p  Paste from clipboard"
-
-" let g:WhichKeyDesc_GoToFileStart = "gg   Goto first line"
-let g:WhichKeyDesc_GoToEndOfFile = "ge   Goto last line"
-let g:WhichKeyDesc_GoToLineStart = "gh   Goto line start"
-let g:WhichKeyDesc_GoToLineEnd = "gl   Goto line end"
-let g:WhichKeyDesc_GoToFirstNonWhitespace = "gs   Goto first non-whitespace char"
-let g:WhichKeyDesc_GoToWindowTop = "gt   Goto window top"
-let g:WhichKeyDesc_GoToWindowCenter = "gc   Goto window center"
-let g:WhichKeyDesc_GoToWindowBottom = "gb   Goto window bottom"
-let g:WhichKeyDesc_GoToDefinition = "gd   Goto definition"
-let g:WhichKeyDesc_GoToTypeDefinition = "gy   Goto type definition"
-let g:WhichKeyDesc_GoToReferences = "gr   Goto references"
-let g:WhichKeyDesc_GoToImplementation = "gi   Goto implementation"
-let g:WhichKeyDesc_GoToLastAccessedFile = "ga   Goto last accessed file"
-let g:WhichKeyDesc_GoToLastModifiedFile = "gm   Goto last modified file"
-let g:WhichKeyDesc_GoToNextBuffer = "gn   Goto next buffer"
-let g:WhichKeyDesc_GoToPrevBuffer = "gp   Goto previous buffer"
-let g:WhichKeyDesc_GoToLastModification = "g.   Goto last modification"
-
-let g:WhichKeyDesc_GotoMatchingBracket = "mm   Goto matching bracket"
-let g:WhichKeyDesc_SurroundAdd = "ms   Surround selection with char"
-let g:WhichKeyDesc_SurroundReplace = "mr   Replace surround char <from> with <to>"
-let g:WhichKeyDesc_SurroundDelete = "md   Delete surround char"
-let g:WhichKeyDesc_SelectTextobjectAround = "ma   Select around textobject"
-let g:WhichKeyDesc_SelectTextobjectInner = "mi   Select inside textobject"
-let g:WhichKeyDesc_SelectWordOuter = "maw   Select around word"
-let g:WhichKeyDesc_SelectBracketsOuter = "mam   Select around matching"
-let g:WhichKeyDesc_SelectFuncOuter = "maf   Select around function"
-let g:WhichKeyDesc_SelectBracketsInner = "mim   Select inside matching"
-let g:WhichKeyDesc_SelectFuncInner = "mif   Select inside function"
-
-let g:WhichKeyDesc_NextParagraph = "]p   Next paragraph"
-let g:WhichKeyDesc_PrevParagraph = "[p   Previous paragraph"
-let g:WhichKeyDesc_NextMatching = "]m   Next matching brace"
-let g:WhichKeyDesc_PrevMatching = "[m   Previous matching brace"
-let g:WhichKeyDesc_NextFunction = "]f   Next function"
-let g:WhichKeyDesc_PrevFunction = "[f   Previous function"
-let g:WhichKeyDesc_NextChange = "]g   Next change"
-let g:WhichKeyDesc_PrevChange = "[g   Previous change"
-
-<leader>
-
-" Search everywhere
-nnoremap <leader>/ :action FindInPath<cr>
-vnoremap <leader>/ :action FindInPath<cr>
-
-" Find file
-nnoremap <leader>f :action GotoFile<cr>
-vnoremap <leader>f :action GotoFile<cr>
-
-" Diagnotics
-nnoremap <leader>d :action ActivateProblemsViewToolWindow<CR>
-vnoremap <leader>d :action ActivateProblemsViewToolWindow<CR>
-
-" Recent files (simulation of buffers)
-nnoremap <leader>b :action RecentFiles<cr>
-vnoremap <leader>b :action RecentFiles<cr>
-
-" Window movement
-nnoremap <leader>wv :action SplitVertically<cr>
-nnoremap <leader>ws :action SplitHorizontally<cr>
-nnoremap <leader>wq :action SplitHorizontally<cr>
-nnoremap <leader>ws :action SplitHorizontally<cr>
-
-" Close window
-nnoremap <leader>wq    :action CloseAllEditors<CR>
-nnoremap <leader>wo    :action CloseAllEditorsButActive<CR>
-
-" Focus window left
-nnoremap <leader>wh         <C-w>h
-
-" Focus window down
-nnoremap <leader>wj         <C-w>j
-
-" Focus window up
-nnoremap <leader>wk       <C-w>k
-
-" Focus window right
-nnoremap <leader>wl          <C-w>l
-
-" Copy to clipboard
-"vnoremap <leader>y "+y
-
-" Paste from clipboard
-"vnoremap <leader>p "+p
-
-" Code actions
-nnoremap <leader>a :action ShowIntentionActions<cr>
-
-" Vim surround
-unmap ds
-map md <Plug>DSurround
-map mr <Plug>CSurround
-map ms <Plug>YSurround
-
-" Helix keybindings
-"nnoremap d x
-"vnoremap d :action EditorDelete<CR>
-"nnoremap x V
-"nnoremap x :action EditorDownWithSelection<CR>
-"vnoremap x :action EditorDownWithSelection<CR>
-nnoremap w :action EditorNextWordWithSelection<CR>
-vnoremap w <ESC>:action EditorNextWordWithSelection<CR>
-nnoremap b :action EditorPreviousWordWithSelection<CR>
-vnoremap b <ESC>:action EditorPreviousWordWithSelection<CR>
-
-nnoremap <leader>r :action RenameElement<CR>
-
-" Go to line number <n> else start of file
-" nnoremap gg :normal! gg<CR>
-
-" Go to the end of the file
-nnoremap ge G
-
-" Go to files in the selection (no exact equivalent, but using :buffers to list open files)
-nnoremap gf :buffers<CR>
-
-" Go to the start of the line
-nnoremap gh :action EditorLineStartWithSelection<CR>
-
-" Go to the end of the line
-nnoremap gl :action EditorLineEndWithSelection<CR>
-
-" Go to first non-whitespace character of the line
-nnoremap gs ^
-
-" Go to the top of the screen
-nnoremap gt H
-
-" Go to the middle of the screen
-nnoremap gc M
-
-" Go to the bottom of the screen
-nnoremap gb L
-
-" Go to definition (LSP)
-nnoremap gd :action GotoDeclaration<CR>
-
-" Go to type definition (LSP) (no exact equivalent, but using GotoDeclaration)
-nnoremap gy :action GotoDeclaration<CR>
-
-" Go to references (LSP)
-nnoremap gr :action FindUsages<CR>
-
-" Go to implementation (LSP)
-nnoremap gi :action GotoImplementation<CR>
-
-" Go to the last accessed/alternate file (no exact equivalent, but using :b# to switch to the last buffer)
-nnoremap ga :b#<CR>
-
-" Go to the last modified/alternate file (no exact equivalent, but using :b# to switch to the last buffer)
-nnoremap gm :b#<CR>
-
-" Go to next buffer
-nnoremap gn :bnext<CR>
-
-" Go to previous buffer
-nnoremap gp :bprev<CR>
-
-" Go to last modification in current file (no exact equivalent, but using '. to go to the last change)
-nnoremap g. :action JumpToLastChange<CR>
-
-" Goto matching bracket (TS)
-nnoremap mm :action EditorMatchBrace<CR>
-vnoremap mm :action EditorMatchBrace<CR>
-
-nnoremap maw :action EditorSelectWord<CR>
-
-" Next and previous change
-nnoremap ]g :action JumpToNextChange<CR>
-nnoremap [g :action JumpToLastChange<CR>
-
-" Next and previous functions
-nnoremap ]f :action MethodDown<CR>
-nnoremap [f :action MethodUp<CR>
-
-nnoremap ]p :action EditorCodeBlockEndWithSelection<CR>
-vnoremap ]p :action EditorCodeBlockEndWithSelection<CR>
-nnoremap [p :action EditorCodeBlockStartWithSelection<CR>
-vnoremap [p :action EditorCodeBlockStartWithSelection<CR>
-
-nnoremap ]m :action EditorCodeBlockEndWithSelection<CR>
-vnoremap ]m :action EditorCodeBlockEndWithSelection<CR>
-nnoremap [m :action EditorCodeBlockStartWithSelection<CR>
-vnoremap [m :action EditorCodeBlockStartWithSelection<CR>
-
-" FIXME
-"vnoremap %s :action SelectAllOccurrences<CR>
-
+" ========= Misc =========
+" Undo tree redo (keep Vim's U -> redo muscle memory)
 nnoremap U <C-R>
 
-nnoremap mim :action EditorMatchBrace<CR> :action EditorLeft<CR> :action EditorRightWithSelection<CR> :action EditorCodeBlockEndWithSelection<CR>
-nnoremap mam :action EditorMatchBrace<CR> :action EditorCodeBlockEndWithSelection<CR>
+" Jump between methods (already above via [[ and ]])
 
-nnoremap maf :action MethodUp<CR> :action EditorCodeBlockEndWithSelection<CR>
-nnoremap mif :action MethodUp<CR> :action EditorCodeBlockEndWithSelection<CR>
-
-" Multiple cursors
-
-Plug 'terryma/vim-multiple-cursors'
-
-nmap C :action EditorCloneCaretBelow<CR>
-nmap <A-C> :action EditorCloneCaretAbove<CR>
-
-nmap <C-n> <Plug>NextWholeOccurrence
-xmap <C-n> <Plug>NextWholeOccurrence
-nmap g<C-n> <Plug>NextOccurrence
-xmap g<C-n> <Plug>NextOccurrence
-xmap <C-x> <Plug>SkipOccurrence
-xmap <C-p> <Plug>RemoveOccurrence
-xmap <S-C-n> <Plug>AllWholeOccurrences
-nmap g<S-C-n> <Plug>AllOccurrences
-xmap g<S-C-n> <Plug>AllOccurrences
-
-nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
-vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
+" Helix-style X/x (line-wise selection/extension)
+nnoremap X :action EditorSelectLine<CR>
+vnoremap X :action EditorSelectLine<CR>
+nnoremap x :action EditorSelectLine<CR>
+vnoremap x :action EditorSelectLine<CR>

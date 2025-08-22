@@ -73,6 +73,77 @@ autoload -Uz compinit && compinit
 # fzf options
 export FZF_CTRL_R_OPTS="--reverse"
 export FZF_TMUX_OPTS="-p"
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview-window=right:60%"
+
+# Custom file finder function for quick file reference
+ff() {
+    local file
+    if command -v fd >/dev/null 2>&1; then
+        # Use fd if available (faster and respects .gitignore)
+        file=$(fd --type f --hidden --follow --exclude .git --exclude node_modules | fzf \
+            --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || cat {} 2>/dev/null || echo "Binary file"' \
+            --preview-window=right:60%:wrap \
+            --bind 'ctrl-/:toggle-preview' \
+            --header 'CTRL-/ to toggle preview, Enter to copy path to clipboard')
+    else
+        # Fallback to find
+        file=$(find . -type f -not -path '*/\.git/*' -not -path '*/node_modules/*' | fzf \
+            --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || cat {} 2>/dev/null || echo "Binary file"' \
+            --preview-window=right:60%:wrap \
+            --bind 'ctrl-/:toggle-preview' \
+            --header 'CTRL-/ to toggle preview, Enter to copy path to clipboard')
+    fi
+
+    if [[ -n "$file" ]]; then
+        echo "$file"
+        # Copy to clipboard if available
+        if command -v pbcopy >/dev/null 2>&1; then
+            echo "$file" | pbcopy
+            echo "📋 Path copied to clipboard!"
+        elif command -v xclip >/dev/null 2>&1; then
+            echo "$file" | xclip -selection clipboard
+            echo "📋 Path copied to clipboard!"
+        fi
+    fi
+}
+
+# Quick content search in files
+fs() {
+    local query="$1"
+    if [[ -z "$query" ]]; then
+        echo "Usage: fs <search_term>"
+        return 1
+    fi
+
+    if command -v rg >/dev/null 2>&1; then
+        # Use ripgrep if available
+        rg --color=always --line-number --no-heading --smart-case "$query" | fzf \
+            --ansi \
+            --delimiter : \
+            --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
+            --preview-window=right:60%:wrap \
+            --bind 'ctrl-/:toggle-preview' \
+            --header 'CTRL-/ to toggle preview'
+    elif command -v ag >/dev/null 2>&1; then
+        # Use silver searcher if available
+        ag --color --line-number "$query" | fzf \
+            --ansi \
+            --delimiter : \
+            --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
+            --preview-window=right:60%:wrap \
+            --bind 'ctrl-/:toggle-preview' \
+            --header 'CTRL-/ to toggle preview'
+    else
+        # Fallback to grep
+        grep -r --line-number --color=always "$query" . | fzf \
+            --ansi \
+            --delimiter : \
+            --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
+            --preview-window=right:60%:wrap \
+            --bind 'ctrl-/:toggle-preview' \
+            --header 'CTRL-/ to toggle preview'
+    fi
+}
 
 export PATH=$HOME/.cargo/bin:$HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
 
@@ -94,6 +165,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # helix-gpt
 export HANDLER=copilot
 
+# Load helix mode for zsh - fallback to local if antidote version doesn't work
+if ! command -v helix_mode >/dev/null 2>&1 && [[ -f "${ZDOTDIR:-$HOME}/.zsh_helix_mode.plugin.zsh" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zsh_helix_mode.plugin.zsh"
+fi
+
 
 # Devbox
 DEVBOX_NO_PROMPT=true
@@ -102,3 +178,10 @@ autoload -U compinit; compinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+source ~/dotfiles/auggie/aliases.zsh
+bindkey -M hxins "^I" expand-or-complete
+
+# Fix right arrow key for zsh autosuggestions in helix insert mode
+bindkey -M hxins "^[OC" forward-char
+bindkey -M hxins "^[[C" forward-char
+export PATH="$HOME/.local/bin:$PATH"
