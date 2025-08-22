@@ -4,39 +4,20 @@ set -e  # Exit on any error
 
 echo "Setting up dotfiles..."
 
-# Check if Nix is available and install packages
-if command -v nix-env >/dev/null 2>&1; then
-    echo "Installing Nix packages..."
-    if [ -f "packages.nix" ]; then
-        nix-env -irf packages.nix
-        echo "✓ Nix packages installed"
-    else
-        echo "⚠ packages.nix not found, skipping Nix package installation"
-    fi
-else
-    echo "⚠ Nix not found. Install Nix first: https://nixos.org/download.html"
-    echo "  Continuing with dotfiles setup..."
-fi
-
 # Install dotfiles using stow
 echo "Installing dotfiles with stow..."
 if command -v stow >/dev/null 2>&1; then
-    stow fzf
-    stow git
-    stow helix
-    stow jj
-    stow ssh
-    stow jetbrains
-    stow vim
-    stow wezterm
-    stow zed
-    stow zsh
+    stow --adopt fzf
+    stow --adopt git
+    stow --adopt ghostty
+    stow --adopt helix
+    stow --adopt ssh
+    stow --adopt vim
+    stow --adopt wezterm
+    stow --adopt zed
+    stow --adopt zsh
 
-    # Stow p10k if directory exists
-    if [ -d "p10k" ]; then
-        stow p10k
-        echo "✓ P10k configuration stowed"
-    fi
+
 
     echo "✓ Dotfiles stowed successfully"
 else
@@ -44,31 +25,58 @@ else
     exit 1
 fi
 
+# Install mob.sh for mob programming
+echo "Installing mob.sh..."
+if ! command -v mob >/dev/null 2>&1; then
+    if command -v curl >/dev/null 2>&1; then
+        curl -sL install.mob.sh | sh
+        echo "✓ mob.sh installed"
+    else
+        echo "⚠ curl not found, skipping mob.sh installation"
+        echo "  Install manually: https://mob.sh"
+    fi
+else
+    echo "✓ mob.sh already installed"
+fi
+
 echo "Setting up zsh plugins..."
 
-# Install antidote if not already present
-if [ ! -d "${ZDOTDIR:-~}/.antidote" ]; then
-    echo "Installing antidote..."
-    git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
-    echo "✓ Antidote installed"
+# Install oh-my-zsh if not already present
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "Installing oh-my-zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    echo "✓ Oh-My-Zsh installed"
 else
-    echo "✓ Antidote already installed"
+    echo "✓ Oh-My-Zsh already installed"
 fi
 
-# Install powerlevel10k if not already present
-if [ ! -d ~/powerlevel10k ]; then
-    echo "Installing powerlevel10k..."
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-    echo "✓ Powerlevel10k installed"
+# Install oh-my-zsh plugins
+echo "Installing oh-my-zsh plugins..."
+
+
+
+# Install zsh-autosuggestions
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    echo "✓ zsh-autosuggestions installed"
 else
-    echo "✓ Powerlevel10k already installed"
+    echo "✓ zsh-autosuggestions already installed"
 fi
 
-# Update antidote plugins
-if command -v zsh >/dev/null 2>&1; then
-    echo "Updating zsh plugins..."
-    zsh -c "source ~/.antidote/antidote.zsh && antidote update" 2>/dev/null || echo "⚠ Plugin update failed (this is normal on first run)"
-    echo "✓ Zsh plugins updated"
+# Install zsh-syntax-highlighting
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    echo "✓ zsh-syntax-highlighting installed"
+else
+    echo "✓ zsh-syntax-highlighting already installed"
+fi
+
+# Install zsh-helix-mode
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-helix-mode" ]; then
+    git clone https://github.com/Multirious/zsh-helix-mode.git $HOME/.oh-my-zsh/custom/plugins/zsh-helix-mode
+    echo "✓ zsh-helix-mode installed"
+else
+    echo "✓ zsh-helix-mode already installed"
 fi
 
 echo ""
@@ -76,6 +84,5 @@ echo "🎉 Setup complete!"
 echo ""
 echo "Next steps:"
 echo "1. Restart your shell or run 'source ~/.zshrc'"
-echo "2. Run 'p10k configure' to customize your prompt"
-echo "3. Ensure ~/.local/bin is in your PATH for auggie-session"
+echo "2. Ensure ~/.local/bin is in your PATH for auggie-session"
 

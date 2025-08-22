@@ -1,6 +1,3 @@
-# Setting up git for multiple accounts
-# https://markentier.tech/posts/2021/02/github-with-multiple-profiles-gpg-ssh-keys/
-
 [user]
 	useConfigOnly = true
 	signingkey = /Users/dheater/.ssh/id_ed25519.pub
@@ -64,25 +61,18 @@
     hunk-header-style = file line-number syntax
 
 [diff]
-	tool = bc
+	tool = vimdiff
 	colorMoved = default
 
 [difftool]
 	prompt = false
 
-[difftool "bc"]
-	cmd = /usr/local/bin/bcomp "$LOCAL" "$REMOTE"
-
 [merge]
-	tool = bc
+	tool = vimdiff
 	conflictstyle = diff3
 
 [mergetool]
 	prompt = false
-
-[mergetool "bc"]
-	cmd = /usr/local/bin/bcomp "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
-	trustExitCode = true
 
 [init]
 	defaultBranch = main
