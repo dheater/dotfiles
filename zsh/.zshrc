@@ -1,25 +1,41 @@
 # .zshrc
-source ~/.antidote/antidote.zsh
-antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
-eval "$(direnv hook zsh)"
+# Path to oh-my-zsh installation
+export ZSH="$HOME/.oh-my-zsh"
 
-# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
-antidote bundle zsh-users/zsh-autosuggestions
+# Set theme - using built-in oh-my-zsh theme for simplicity
+ZSH_THEME="ys"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/powerlevel10k/powerlevel10k.zsh-theme
+# Oh-My-Zsh plugins
+plugins=(command-not-found git direnv)
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# Load Oh-My-Zsh
+source $ZSH/oh-my-zsh.sh
 
-# export LANGUAGE=en_US.UTF-8
-# export LC_CTYPE=en_US.UTF-8
-# export LC_ALL=en_US.UTF-8
+# Load additional plugins
+source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source ~/.oh-my-zsh/custom/plugins/zsh-helix-mode/zsh-helix-mode.plugin.zsh 2>/dev/null
+
+# Configure zsh-autosuggestions compatibility with zsh-helix-mode
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
+  zhm_history_prev
+  zhm_history_next
+  zhm_prompt_accept
+  zhm_accept
+  zhm_accept_or_insert_newline
+)
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(
+  zhm_move_right
+)
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(
+  zhm_move_next_word_start
+  zhm_move_next_word_end
+)
+
+# Fix syntax highlighting compatibility
+zhm-add-update-region-highlight-hook 2>/dev/null
+
+
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -33,8 +49,7 @@ setopt NO_CASE_GLOB
 # and make it work like bash
 setopt GLOB_COMPLETE
 
-# Use vi mode
-# bindkey -v
+
 
 SAVEHIST=5000
 HISTSIZE=2000
@@ -75,7 +90,12 @@ export FZF_CTRL_R_OPTS="--reverse"
 export FZF_TMUX_OPTS="-p"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview-window=right:60%"
 
-# Custom file finder function for quick file reference
+# Interactive file finder with fuzzy search and preview
+# Usage: ff
+# - Searches all files (respects .gitignore)
+# - Shows file preview with syntax highlighting
+# - Copies selected file path to clipboard
+# - CTRL-/ to toggle preview, Enter to select
 ff() {
     local file
     if command -v fd >/dev/null 2>&1; then
@@ -84,14 +104,14 @@ ff() {
             --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || cat {} 2>/dev/null || echo "Binary file"' \
             --preview-window=right:60%:wrap \
             --bind 'ctrl-/:toggle-preview' \
-            --header 'CTRL-/ to toggle preview, Enter to copy path to clipboard')
+            --header 'File Finder | CTRL-/ toggle preview | Enter to copy path to clipboard')
     else
         # Fallback to find
         file=$(find . -type f -not -path '*/\.git/*' -not -path '*/node_modules/*' | fzf \
             --preview 'bat --style=numbers --color=always --line-range :500 {} 2>/dev/null || cat {} 2>/dev/null || echo "Binary file"' \
             --preview-window=right:60%:wrap \
             --bind 'ctrl-/:toggle-preview' \
-            --header 'CTRL-/ to toggle preview, Enter to copy path to clipboard')
+            --header 'File Finder | CTRL-/ toggle preview | Enter to copy path to clipboard')
     fi
 
     if [[ -n "$file" ]]; then
@@ -107,11 +127,17 @@ ff() {
     fi
 }
 
-# Quick content search in files
+# Interactive content search across files with fuzzy matching
+# Usage: fs <search_term>
+# - Searches file contents using ripgrep/ag/grep
+# - Shows matching lines with context and syntax highlighting
+# - CTRL-/ to toggle preview, Enter to jump to match
 fs() {
     local query="$1"
     if [[ -z "$query" ]]; then
         echo "Usage: fs <search_term>"
+        echo "  Interactive search through file contents"
+        echo "  Shows matching lines with preview and context"
         return 1
     fi
 
@@ -123,7 +149,7 @@ fs() {
             --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
             --preview-window=right:60%:wrap \
             --bind 'ctrl-/:toggle-preview' \
-            --header 'CTRL-/ to toggle preview'
+            --header "Content Search: \"$query\" | CTRL-/ toggle preview | Enter to view"
     elif command -v ag >/dev/null 2>&1; then
         # Use silver searcher if available
         ag --color --line-number "$query" | fzf \
@@ -132,7 +158,7 @@ fs() {
             --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
             --preview-window=right:60%:wrap \
             --bind 'ctrl-/:toggle-preview' \
-            --header 'CTRL-/ to toggle preview'
+            --header "Content Search: \"$query\" | CTRL-/ toggle preview | Enter to view"
     else
         # Fallback to grep
         grep -r --line-number --color=always "$query" . | fzf \
@@ -141,7 +167,7 @@ fs() {
             --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' \
             --preview-window=right:60%:wrap \
             --bind 'ctrl-/:toggle-preview' \
-            --header 'CTRL-/ to toggle preview'
+            --header "Content Search: \"$query\" | CTRL-/ toggle preview | Enter to view"
     fi
 }
 
@@ -152,36 +178,58 @@ export PATH=$HOME/.cargo/bin:$HOME/.config/tmux/plugins/t-smart-tmux-session-man
 # Setup zoxide
 eval "$(zoxide init zsh)"
 
-# Shortcuts for CoPilot CLI
-# eval "$(github-copilot-cli alias -- "$0")"
 
-# bun completions
-[ -s "/home/dheater/.bun/_bun" ] && source "/home/dheater/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# helix-gpt
+# helix-gpt (if using)
 export HANDLER=copilot
 
-# Load helix mode for zsh - fallback to local if antidote version doesn't work
-if ! command -v helix_mode >/dev/null 2>&1 && [[ -f "${ZDOTDIR:-$HOME}/.zsh_helix_mode.plugin.zsh" ]]; then
-    source "${ZDOTDIR:-$HOME}/.zsh_helix_mode.plugin.zsh"
-fi
 
 
-# Devbox
-DEVBOX_NO_PROMPT=true
-autoload -U compinit; compinit
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 
 source ~/dotfiles/auggie/aliases.zsh
-bindkey -M hxins "^I" expand-or-complete
 
-# Fix right arrow key for zsh autosuggestions in helix insert mode
-bindkey -M hxins "^[OC" forward-char
-bindkey -M hxins "^[[C" forward-char
+# CUSTOM FIX: Enhanced zsh-autosuggestions compatibility with zsh-helix-mode
+# This addresses cursor synchronization issues not yet fixed upstream
+# See: https://github.com/Multirious/zsh-helix-mode/issues/31
+# The helix mode plugin interferes with autosuggestion cursor positioning
+function zhm_autosuggest_accept {
+  local suggestion=""
+
+  # Get suggestion using the history strategy
+  if (( $+functions[_zsh_autosuggest_strategy_history] )); then
+    _zsh_autosuggest_strategy_history "$BUFFER"
+  fi
+
+  if [[ -n "$suggestion" ]]; then
+    # Accept the suggestion by updating buffer and cursor
+    BUFFER="$suggestion"
+    CURSOR=${#BUFFER}
+
+    # Sync helix mode cursor tracking
+    if (( $+zhm_cursors_pos )); then
+      zhm_cursors_pos[${ZHM_PRIMARY_CURSOR_IDX:-1}]=$CURSOR
+      zhm_cursors_selection_left[${ZHM_PRIMARY_CURSOR_IDX:-1}]=$CURSOR
+      zhm_cursors_selection_right[${ZHM_PRIMARY_CURSOR_IDX:-1}]=$CURSOR
+      (( $+functions[__zhm_update_last_moved] )) && __zhm_update_last_moved
+      (( $+functions[__zhm_update_region_highlight] )) && __zhm_update_region_highlight
+    fi
+  else
+    # No suggestion, just move forward one character
+    zle forward-char
+  fi
+}
+zle -N zhm_autosuggest_accept
+
+# Apply the fix after helix mode loads
+function zhm_setup_autosuggestions {
+  if (( $+functions[zhm_insert] )); then
+    bindkey -M hxins "^[OC" zhm_autosuggest_accept  # Right arrow
+    bindkey -M hxins "^[[C" zhm_autosuggest_accept  # Right arrow (alternate)
+    precmd_functions=(${precmd_functions:#zhm_setup_autosuggestions})
+  fi
+}
+precmd_functions+=(zhm_setup_autosuggestions)
+
 export PATH="$HOME/.local/bin:$PATH"

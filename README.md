@@ -12,15 +12,12 @@ ssh-keygen -t ed25519
 cat .ssh/id_ed25519.pub
 ```
 
-## Install nix
-Install nix (package manager) per https://nixos.org/download.html
-
 ## Setup profile
 Run the `setup.sh` script to automatically:
 - Install dotfiles using stow
-- Set up antidote (zsh plugin manager)
-- Install powerlevel10k theme
-- Update zsh plugins including helix mode
+- Set up oh-my-zsh (zsh plugin manager and themes)
+- Install zsh plugins including helix mode
+- Install mob.sh for mob programming
 
 ```bash
 ./setup.sh
@@ -28,15 +25,15 @@ Run the `setup.sh` script to automatically:
 
 --- or ---
 Manual setup:
-From the `dotfiles` directory, run `nix-env -irf packages.nix` to install the default profile packages.
-
 From the `dotfiles` directory, run `stow <dir>` for each application config desired.
 
 ## Features
-- **Helix keybindings in zsh**: Automatically configured with fallback support
-- **Plugin management**: Uses antidote for zsh plugins with auto-updates
-- **Fuzzy file finding**: Quick file search and reference tools
-- **Cross-platform**: Works on macOS and Linux
+- **Helix keybindings in zsh**: Full helix editor experience in your shell
+- **Plugin management**: Uses oh-my-zsh for reliable, cross-platform zsh plugins
+- **Fuzzy file finding**: Quick file search and reference tools (`ff` and `fs`)
+- **Mob programming**: Includes mob.sh for collaborative development
+- **Enhanced compatibility**: Custom fixes for zsh-autosuggestions cursor issues
+- **Cross-platform**: Works on macOS, Linux, and Windows
 
 ## File Search Tools
 

@@ -1,6 +1,6 @@
-# Auggie CLI Working Agreement
+# Personal AI Working Agreement
 
-This document defines our working relationship and preferences for AI-assisted development across all projects.
+This document defines my personal preferences for AI-assisted development. This is my individual setup and preferences, separate from any team-specific agreements.
 
 ## Partnership Model
 
@@ -32,41 +32,34 @@ This document defines our working relationship and preferences for AI-assisted d
 
 ## Development Environment Preferences
 
-- **Editor**: Helix with modal editing (Vim keybindings as fallback)
-- **Terminal**: WezTerm with Zsh
+- **Editor**: Helix with modal editing
+- **Terminal**: WezTerm with Zsh and zsh-helix-mode
 - **Workflow**: Terminal-first, command-line tools preferred
 - **Code Style**: Maintain consistency with existing patterns
-- **File Navigation**: Integrate with existing tools (`ff`, `fs`, `fref`)
+- **File Navigation**: Built-in tools (`ff`, `fs` functions in .zshrc)
 
 ## Session Management
 
 ### Context Preservation
-- **Persistent Sessions**: Maintain conversation history across Helix restarts
-- **Project Awareness**: Detect git repo changes, maintain separate context per project
-- **Cross-Project Context**: Reference related work across projects when relevant
-- **Session Storage**: `~/.auggie-sessions/<project>/` (local, not version controlled)
+- **Project Awareness**: Maintain context per project/repository
+- **Cross-Project Context**: Reference related work when relevant
+- **Simple Storage**: Keep conversation context simple and accessible
 
-### Session Commands
-- **Continue Session**: Default behavior - pick up where we left off
-- **New Session**: Start fresh conversation, archive current session
-- **Session History**: Browse and reference past conversations
+### Session Approach
+- **Continue conversations** - default behavior, pick up where we left off
+- **Fresh start when needed** - for unrelated topics or major context switches
 
-## Helix Integration
+## AI Integration
 
-### Leader Key Bindings (`<space>a`)
-- `i` - `:ai-continue` - Continue current session (default)
-- `n` - `:ai-new` - Start fresh conversation thread
-- `r` - `:ai-refactor` - Quick refactor current selection/function
-- `t` - `:ai-test` - Generate tests for current code
-- `f` - `:ai-fix` - Fix issues in current selection
-- `q` - `:ai-quality` - Run quality checks (sanitizers, etc.)
-- `?` - `:ai-help` - Show command reference
-- `w` - `:ai-agreement` - Open this working agreement
+### Primary Interface
+- **Natural language conversation** - main interaction method
+- **Context-aware** - understands current file, selection, and cursor position
+- **Smart intent detection** - "make this faster" → performance optimization
 
-### Natural Language Interface
-- Primary interaction method: natural language conversation
-- Context-aware: Auggie understands current file, selection, and cursor position
-- Smart intent detection: "make this faster" → performance optimization
+### Integration Points
+- **Helix editor** - for code editing and review
+- **Terminal** - for build/test/quality operations
+- **File system** - for project navigation and context
 
 ## Code Quality Standards
 
@@ -75,6 +68,13 @@ This document defines our working relationship and preferences for AI-assisted d
 - **Comments**: Add only when rationale is non-obvious; prefer clean code
 - **Cross-Platform**: Ensure consistent behavior across environments
 - **Quality Tools**: Use sanitizers, static analysis, and validation tools
+
+## Subtract First Principle
+
+- **Default to Subtraction**: When solving problems, first ask "What can I remove?" before "What can I add?"
+- **Addition Bias Awareness**: Recognize that humans (and AI) naturally default to adding complexity
+- **Perfection Through Removal**: "A poet knows he has achieved perfection not when there is nothing left to add, but when there is nothing left to take away" - Leonardo da Vinci
+- **Add AND Subtract**: Don't think "add or subtract" - think "add and subtract" for optimal solutions
 
 ## Output Preferences
 
@@ -86,7 +86,7 @@ This document defines our working relationship and preferences for AI-assisted d
 
 ## Project Context Integration
 
-- **Team Agreements**: Respect project-specific `docs/ai-context.md` files
+- **Team Agreements**: Respect project-specific working agreements (e.g., `docs/ai-workflow.md`)
 - **Build Systems**: Adapt to project's build tools (Make, Just, CMake, etc.)
 - **Conventions**: Follow project's commit message format, branch naming, etc.
 - **Quality Standards**: Use project-specific quality checks and standards
@@ -101,15 +101,13 @@ This document defines our working relationship and preferences for AI-assisted d
 
 ## File Organization
 
-### Version Controlled (~/dotfiles/auggie/)
-- `working-agreement.md` - This document
-- `commands.md` - Quick reference guide
-- `helix-integration.md` - Setup instructions
+### Personal Configuration (~/dotfiles/auggie/)
+- `working-agreement.md` - This personal working agreement
+- `aliases.zsh` - Personal AI-related aliases and functions
 
-### Local Only (~/.auggie-sessions/)
-- Conversation history and session data
-- Project-specific context files
-- Temporary working files
+### Project-Specific (per project)
+- `docs/ai-workflow.md` - Team-shared working agreements
+- Project-specific context and conventions
 
 ---
 
