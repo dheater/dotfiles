@@ -91,12 +91,40 @@ export FZF_TMUX_OPTS="-p"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview-window=right:60%"
 
 # Interactive file finder with fuzzy search and preview
-# Usage: ff
-# - Searches all files (respects .gitignore)
-# - Shows file preview with syntax highlighting
-# - Copies selected file path to clipboard
-# - CTRL-/ to toggle preview, Enter to select
+# Usage: ff [--help]
+# 
+# Features:
+# - Searches all files recursively (respects .gitignore when using fd)
+# - Live preview with syntax highlighting via bat
+# - Copies selected file path to clipboard automatically
+# - Fast search using fd (falls back to find if fd not available)
+#
+# Controls:
+# - CTRL-/ : Toggle preview pane
+# - Enter  : Select file and copy path to clipboard
+# - Esc    : Cancel and exit
 ff() {
+    if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+        echo "ff - Interactive File Finder"
+        echo ""
+        echo "USAGE:"
+        echo "  ff [--help]"
+        echo ""
+        echo "DESCRIPTION:"
+        echo "  Fuzzy search through all files in the current directory tree."
+        echo "  Respects .gitignore when fd is available. Shows live preview"
+        echo "  with syntax highlighting and copies selected path to clipboard."
+        echo ""
+        echo "CONTROLS:"
+        echo "  CTRL-/  Toggle preview pane"
+        echo "  Enter   Select file and copy path to clipboard"
+        echo "  Esc     Cancel and exit"
+        echo ""
+        echo "DEPENDENCIES:"
+        echo "  Recommended: fd, bat (for better performance and highlighting)"
+        echo "  Fallback: find, cat"
+        return 0
+    fi
     local file
     if command -v fd >/dev/null 2>&1; then
         # Use fd if available (faster and respects .gitignore)
@@ -128,11 +156,56 @@ ff() {
 }
 
 # Interactive content search across files with fuzzy matching
-# Usage: fs <search_term>
-# - Searches file contents using ripgrep/ag/grep
+# Usage: fs <search_term> [--help]
+# 
+# Features:
+# - Searches file contents using ripgrep/ag/grep (in order of preference)
 # - Shows matching lines with context and syntax highlighting
-# - CTRL-/ to toggle preview, Enter to jump to match
+# - Live preview of matches with highlighted search terms
+# - Fast search with smart case matching
+#
+# Controls:
+# - CTRL-/ : Toggle preview pane
+# - Enter  : View file at matching line
+# - Esc    : Cancel and exit
 fs() {
+    if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+        echo "fs - Interactive Content Search"
+        echo ""
+        echo "USAGE:"
+        echo "  fs <search_term> [--help]"
+        echo ""
+        echo "DESCRIPTION:"
+        echo "  Fuzzy search through file contents in the current directory tree."
+        echo "  Shows matching lines with context and syntax highlighting."
+        echo "  Uses ripgrep, ag, or grep (in order of preference)."
+        echo ""
+        echo "CONTROLS:"
+        echo "  CTRL-/  Toggle preview pane"
+        echo "  Enter   View file at matching line"
+        echo "  Esc     Cancel and exit"
+        echo ""
+        echo "DEPENDENCIES:"
+        echo "  Recommended: ripgrep (rg), bat (for better performance and highlighting)"
+        echo "  Alternative: ag (silver searcher)"
+        echo "  Fallback: grep"
+        echo ""
+        echo "EXAMPLES:"
+        echo "  fs "function main"     # Search for function definitions"
+        echo "  fs "TODO"             # Find TODO comments"
+        echo "  fs "import.*numpy"    # Search with regex patterns"
+        return 0
+    fi
+
+    local query="$1"
+    if [[ -z "$query" ]]; then
+        echo "Usage: fs <search_term>"
+        echo "  Interactive search through file contents"
+        echo "  Shows matching lines with preview and context"
+        echo ""
+        echo "Run 'fs --help' for detailed usage information"
+        return 1
+    fi
     local query="$1"
     if [[ -z "$query" ]]; then
         echo "Usage: fs <search_term>"
@@ -189,6 +262,11 @@ export HANDLER=copilot
 
 
 source ~/dotfiles/auggie/aliases.zsh
+
+# PAS Plumbing workspace aliases
+if [ -f ~/pas/plumbing/aliases.zsh ]; then
+    source ~/pas/plumbing/aliases.zsh
+fi
 
 # CUSTOM FIX: Enhanced zsh-autosuggestions compatibility with zsh-helix-mode
 # This addresses cursor synchronization issues not yet fixed upstream
