@@ -109,6 +109,21 @@ This document defines my personal preferences for AI-assisted development. This 
 - `docs/ai-workflow.md` - Team-shared working agreements
 - Project-specific context and conventions
 
+## Memory and Context Management
+
+### Long-term Memory Storage
+- **Primary Location**: This working-agreement.md file (version controlled in git)
+- **Context Loading**: Via `carl` command which attempts to load additional context files
+- **Memory Updates**: Add learnings and patterns to this file for persistence across sessions
+- **Reference Command**: When asked "where are your memories stored?" - point to this file
+- **File Access**: Use `cat` command for files outside workspace, not `view` tool
+
+#### Communication Patterns
+- Present multiple theories with likelihood assessment rather than single confident conclusions
+- Provide concrete, simple action steps
+- Avoid stating conclusions with excessive confidence when evidence is incomplete
+- Use humble language: "I think", "probably", "might be" when uncertain
+
 ---
 
 *This agreement evolves as our working relationship develops. Updates should be discussed and agreed upon.*
