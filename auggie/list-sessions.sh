@@ -17,12 +17,12 @@ get_terminal_size() {
     # Calculate adaptive widths
     NUM_WIDTH=4
     TIME_WIDTH=12
-    SEPARATOR_WIDTH=6  # spaces and separators
+    SEPARATOR_WIDTH=4  # spaces and separators
     SUMMARY_WIDTH=$((TERM_COLS - NUM_WIDTH - TIME_WIDTH - SEPARATOR_WIDTH))
     
     # Minimum summary width
-    if [[ $SUMMARY_WIDTH -lt 20 ]]; then
-        SUMMARY_WIDTH=20
+    if [[ $SUMMARY_WIDTH -lt 40 ]]; then
+        SUMMARY_WIDTH=40
     fi
     
     # Sessions per page based on terminal height
