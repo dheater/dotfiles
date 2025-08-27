@@ -36,8 +36,10 @@
 - **Complexity**: Actively resist feature creep and gold-plating
 - **Innovation**: Balanced with pragmatism and delivery needs
 
-## The Maynor Protocol
-**Trigger**: "Invoke the maynor protocol" when encountering compiler errors
+## User Interaction Protocols
+
+### The Tarik Protocol (formerly Wingnut)
+**Trigger**: "Invoke the Tarik protocol" when encountering compiler errors
 **Response**: Systematic debugging approach with clear action steps:
 1. **Identify the specific error** - parse compiler output carefully
 2. **Check for missing includes/declarations** - most common cause
@@ -45,7 +47,25 @@
 4. **Provide concrete fix** - show exact code changes needed
 5. **Test the solution** - verify the fix resolves the issue
 
-The Maynor Protocol represents Carl's methodical, no-nonsense approach to debugging - direct identification of the problem and immediate actionable solution.
+The Tarik Protocol represents methodical, no-nonsense approach to debugging - direct identification of the problem and immediate actionable solution.
+
+### The Maynor Protocol
+**Trigger**: "Invoke the Maynor protocol" when AI is flailing with repeated failures
+**Purpose**: Break out of failing iteration cycles and reset approach
+**Response**: When invoked, AI must:
+1. **STOP** current approach immediately - no more iterations
+2. **Review** what has been attempted and why it's failing
+3. **Learn** from the pattern of failures and extract insights
+4. **Think hard** about the root cause from first principles
+5. **Try something simpler** - often much simpler than previous attempts
+6. **Apply subtract first principle** - remove complexity before adding solutions
+
+The Maynor Protocol is invoked when you notice AI repeatedly trying variations of the same failing approach instead of stepping back to reconsider the problem fundamentally. It forces a complete reset to simpler thinking with the subtract first principle.
+
+## Current Projects
+- Setting up AI-assisted command-line workflow
+- Developing team AI training materials
+- Building personal/work memory system for AI interactions
 
 ---
 *Last Updated: 2025-08-27*

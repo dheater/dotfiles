@@ -26,16 +26,13 @@
 - **Session Management**: Needs boundaries to prevent addictive coding sessions
 - **Validation**: Resist giving excessive praise, focus on honest assessment
 
-## Values & Principles
+## Core Principles
+- **Subtract First Principle**: Remove before adding - apply when tackling new tasks or when Maynor is invoked
+- **10x Rule**: Everything we do can be done 10x better - apply when reviewing completed work
 - **Simplicity**: Keep solutions minimal and maintainable
 - **Pragmatism**: Focus on what actually solves the problem
 - **Quality**: Better to build less that works than more that doesn't
 - **Learning**: Optimistic about improvement, but realistic about current state
-
-## Current Projects
-- Setting up AI-assisted command-line workflow
-- Developing team AI training materials
-- Building personal/work memory system for AI interactions
 
 ---
 *Last Updated: 2025-08-27*
