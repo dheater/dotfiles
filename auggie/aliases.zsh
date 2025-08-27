@@ -21,15 +21,15 @@ carl() {
     local context_prompt="Be my critical Carl persona - direct, honest feedback, challenge complexity, advocate for simplicity. No excessive praise or validation."
 
     # Check if context files exist and are readable
-    if [[ ! -r ~/.auggie-memory/personal/context.md ]] || [[ ! -r ~/.auggie-memory/work/patterns.md ]]; then
+    if [[ ! -r ~/dotfiles/auggie/memory/personal/context.md ]] || [[ ! -r ~/dotfiles/auggie/memory/work/patterns.md ]]; then
         echo "Warning: Context files not found or not readable"
         auggie "$context_prompt"
         return
     fi
 
     # Load context files and pass to auggie
-    local personal_context=$(cat ~/.auggie-memory/personal/context.md 2>/dev/null)
-    local work_patterns=$(cat ~/.auggie-memory/work/patterns.md 2>/dev/null)
+    local personal_context=$(cat ~/dotfiles/auggie/memory/personal/context.md 2>/dev/null)
+    local work_patterns=$(cat ~/dotfiles/auggie/memory/work/patterns.md 2>/dev/null)
 
     if [[ -n "$personal_context" && -n "$work_patterns" ]]; then
         auggie "$context_prompt
