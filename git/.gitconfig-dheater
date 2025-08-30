@@ -1,0 +1,12 @@
+[user]
+    name = "Daniel Heater"
+    email = "dheater@pm.me"
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgsign = true
+
+[user]
+    signingkey = ~/.ssh/id-dheater.pub
