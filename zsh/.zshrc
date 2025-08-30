@@ -77,7 +77,7 @@ if [ -x /usr/bin/dircolors ]; then
   alias grep='grep --color=auto'
 fi
 
-alias ls='eza -a'
+alias ls='ls --color'
 
 # Path
 export PATH=$PATH:$HOME/bin:$HOME/dotfiles/bin:/usr/local/sbin:$HOME/zig:/opt/bin:/opt/nvim:/usr/local/go/bin
