@@ -69,3 +69,41 @@ The Maynor Protocol is invoked when you notice AI repeatedly trying variations o
 
 ---
 *Last Updated: 2025-08-27*
+
+## Quality Gates (Pre-Commit Checklist)
+**ALWAYS run before any commit or code completion - language specific:**
+
+### Rust Projects
+```bash
+cargo clippy -- -D warnings && cargo fmt --check && cargo test
+```
+1. **Clippy (Strict)**: `cargo clippy -- -D warnings` - Must pass with zero warnings
+2. **Rustfmt**: `cargo fmt --check` - Must pass with no formatting changes needed  
+3. **Tests**: `cargo test` - All tests must pass
+
+### Zig Projects
+```bash
+zig fmt --check . && zig build test && zig build
+```
+1. **Zig fmt**: `zig fmt --check .` - Must pass with no formatting changes needed
+2. **Tests**: `zig build test` - All tests must pass
+3. **Build**: `zig build` - Must compile without errors or warnings
+
+### C++ Projects  
+```bash
+clang-format --dry-run --Werror . && clang-tidy **/*.cpp **/*.h && make test && make
+```
+1. **Clang-format**: `clang-format --dry-run --Werror .` - Must pass formatting check
+2. **Static Analysis**: `clang-tidy **/*.cpp **/*.h` - Must pass static analysis checks
+3. **Tests**: `make test` (or equivalent) - All tests must pass
+4. **Build**: `make` (or equivalent) - Must compile without errors or warnings
+
+**Critical**: Never skip quality gates. They prevent regressions and maintain code quality standards. If any gate fails, fix the issues before proceeding.
+
+## Memory Management
+**When user says "memory" or "remember"**: Store information in `~/.auggie-memory/` files
+- Personal context: `~/.auggie-memory/personal/context.md`
+- Work patterns: `~/.auggie-memory/work/patterns.md` 
+- Design principles: `~/.auggie-memory/design-principles.md`
+- Update the appropriate file based on context type
+

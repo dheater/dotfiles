@@ -81,9 +81,15 @@
 	# Undo last commit (keep changes)
 	undo = reset --soft HEAD~1
 
-[includeIf "gitdir:~/src/work/"]
+[includeIf "gitdir:~/src/librssconnect/"]
     path = ~/.gitconfig-imprivata
-[includeIf "gitdir:~/src/personal/"]
+[includeIf "gitdir:~/src/dheater/"]
     path = ~/.gitconfig-dheater
 [includeIf "gitdir:~/dotfiles/"]
+    path = ~/.gitconfig-dheater
+
+# Viewyard context-specific configs
+[includeIf "gitdir:~/src/imprivata/"]
+    path = ~/.gitconfig-imprivata
+[includeIf "gitdir:~/src/dheater/"]
     path = ~/.gitconfig-dheater

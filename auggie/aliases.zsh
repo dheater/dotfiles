@@ -2,34 +2,31 @@
 # Simple, practical shortcuts for AI-assisted development
 
 # Quick access to working agreement
-alias ai-agreement='hx ~/dotfiles/auggie/working-agreement.md'
+alias ai-agreement='hx $HOME/.auggie-memory/../working-agreement.md'
 
 # Project-specific AI workflow (when it exists)
 alias ai-workflow='[[ -f docs/ai-workflow.md ]] && hx docs/ai-workflow.md || echo "No project AI workflow found"'
 
 # Auggie with sequential-thinking MCP server enabled globally
-alias auggie-think="auggie --mcp-config ~/dotfiles/auggie/mcp-config.json"
+alias auggie-think="auggie --mcp-config $HOME/.auggie-memory/../mcp-config.json"
 
 # Carl - Auggie with personal context and critical persona pre-loaded
 carl() {
     # Handle resume command
     if [[ "$1" == "resume" ]]; then
-        ~/dotfiles/auggie/list-sessions.sh
+        $HOME/.auggie-memory/../list-sessions.sh
         return
     fi
+
+    echo "🔥 Carl loaded - Design role models: Andrew Kelly (Zig) & Casey Muratori"
+    echo "   Direct feedback, challenge complexity, advocate simplicity"
+    echo ""
 
     local context_prompt="Be my critical Carl persona - direct, honest feedback, challenge complexity, advocate for simplicity. No excessive praise or validation."
 
-    # Check if context files exist and are readable
-    if [[ ! -r ~/dotfiles/auggie/memory/personal/context.md ]] || [[ ! -r ~/dotfiles/auggie/memory/work/patterns.md ]]; then
-        echo "Warning: Context files not found or not readable"
-        auggie "$context_prompt"
-        return
-    fi
-
-    # Load context files and pass to auggie
-    local personal_context=$(cat ~/dotfiles/auggie/memory/personal/context.md 2>/dev/null)
-    local work_patterns=$(cat ~/dotfiles/auggie/memory/work/patterns.md 2>/dev/null)
+    # Load context files directly without testing first
+    local personal_context=$(cat $HOME/.auggie-memory/personal/context.md 2>/dev/null)
+    local work_patterns=$(cat $HOME/.auggie-memory/work/patterns.md 2>/dev/null)
 
     if [[ -n "$personal_context" && -n "$work_patterns" ]]; then
         auggie "$context_prompt
@@ -41,7 +38,8 @@ Work Patterns:
 $work_patterns"
     else
         echo "Warning: Failed to load context files, falling back to basic prompt"
+        echo "Personal context loaded: $([[ -n "$personal_context" ]] && echo "yes" || echo "no")"
+        echo "Work patterns loaded: $([[ -n "$work_patterns" ]] && echo "yes" || echo "no")"
         auggie "$context_prompt"
     fi
 }
-

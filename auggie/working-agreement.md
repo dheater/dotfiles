@@ -101,7 +101,7 @@ This document defines my personal preferences for AI-assisted development. This 
 
 ## File Organization
 
-### Personal Configuration (~/dotfiles/auggie/)
+### Personal Configuration (~/.auggie-memory/)
 - `working-agreement.md` - This personal working agreement
 - `aliases.zsh` - Personal AI-related aliases and functions
 
