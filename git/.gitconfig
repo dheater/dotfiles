@@ -1,9 +1,3 @@
-[user]
-	name = Daniel Heater
-	useConfigOnly = true
-	#email = daniel.heater@imprivata.com
-	signingkey = ~/.ssh/id-dheater.pub
-
 [core]
 	editor = hx
 	autocrlf = input
@@ -80,16 +74,3 @@
 
 	# Undo last commit (keep changes)
 	undo = reset --soft HEAD~1
-
-[includeIf "gitdir:~/src/librssconnect/"]
-    path = ~/.gitconfig-imprivata
-[includeIf "gitdir:~/src/dheater/"]
-    path = ~/.gitconfig-dheater
-[includeIf "gitdir:~/dotfiles/"]
-    path = ~/.gitconfig-dheater
-
-# Viewyard context-specific configs
-[includeIf "gitdir:~/src/imprivata/"]
-    path = ~/.gitconfig-imprivata
-[includeIf "gitdir:~/src/dheater/"]
-    path = ~/.gitconfig-dheater

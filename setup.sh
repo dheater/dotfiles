@@ -2,7 +2,11 @@
 
 set -e  # Exit on any error
 
-echo "Setting up dotfiles..."
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+echo "Setting up dotfiles from $SCRIPT_DIR..."
 
 # Check if stow is available
 if \! command -v stow >/dev/null 2>&1; then
@@ -30,7 +34,7 @@ PACKAGES=(
 for package in "${PACKAGES[@]}"; do
     if [ -d "$package" ]; then
         echo "  Stowing $package..."
-        stow --adopt "$package"
+        stow -t ~ --adopt "$package"
     else
         echo "  ⚠ Skipping $package (directory not found)"
     fi
