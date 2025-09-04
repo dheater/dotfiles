@@ -79,8 +79,21 @@ fi
 
 alias ls='ls --color'
 
-# Path
-export PATH=$PATH:$HOME/bin:$HOME/dotfiles/bin:/usr/local/sbin:$HOME/zig:/opt/bin:/opt/nvim:/usr/local/go/bin
+# Path - dynamically determine dotfiles location
+if [[ -L "${(%):-%N}" ]]; then
+    # If .zshrc is a symlink (stow-managed), resolve dotfiles location
+    DOTFILES_DIR="$HOME/$(dirname "$(dirname "$(readlink "${(%):-%N}")")")"
+else
+    # Fallback to common locations
+    if [[ -d "$HOME/dotfiles" ]]; then
+        DOTFILES_DIR="$HOME/dotfiles"
+    elif [[ -d "$HOME/src/dheater/main/dotfiles" ]]; then
+        DOTFILES_DIR="$HOME/src/dheater/main/dotfiles"
+    else
+        DOTFILES_DIR="$HOME/dotfiles"  # Default fallback
+    fi
+fi
+export PATH=$PATH:$HOME/bin:$DOTFILES_DIR/bin:/usr/local/sbin:$HOME/zig:/opt/bin:/opt/nvim:/usr/local/go/bin
 
 # Git autocomplete
 autoload -Uz compinit && compinit
@@ -261,7 +274,10 @@ export HANDLER=copilot
 
 
 
-source ~/dotfiles/auggie/aliases.zsh
+# Source auggie aliases if available
+if [[ -f "$DOTFILES_DIR/auggie/aliases.zsh" ]]; then
+    source "$DOTFILES_DIR/auggie/aliases.zsh"
+fi
 
 # PAS Plumbing workspace aliases
 if [ -f ~/pas/plumbing/aliases.zsh ]; then
