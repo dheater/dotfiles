@@ -107,3 +107,8 @@ clang-format --dry-run --Werror . && clang-tidy **/*.cpp **/*.h && make test && 
 - Design principles: `~/.auggie-memory/design-principles.md`
 - Update the appropriate file based on context type
 
+CRITICAL SAFETY RULES - DATA LOSS PREVENTION
+- NEVER use ~ in paths with mkdir/save-file/str-replace-editor - Creates literal ~ directories  
+- ALWAYS use absolute paths: /Users/dheater/ or $HOME/ instead of ~/
+- ALWAYS verify before destructive operations: Use ls -la, file, readlink to check targets
+- NEVER remove without verification: Check if symlinks point to critical directories like $HOME
