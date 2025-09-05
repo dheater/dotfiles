@@ -4,7 +4,7 @@ local wezterm = require 'wezterm'
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
-config.color_scheme = 'Default dark (base16)'
+config.color_scheme = 'Dracula'
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 14
 
@@ -68,7 +68,7 @@ config.keys = {
         TERM = 'screen-256color',
       },
       args = {
-        '/usr/local/bin/hx',
+        'hx',
         os.getenv('WEZTERM_CONFIG_FILE'),
       },
     },
