@@ -109,10 +109,10 @@ install_essentials() {
     
     case "$os" in
         "macos")
-            brew install git curl wget stow zsh
+            brew install git curl wget stow zsh direnv zoxide
             ;;
         "linux"|"wsl")
-            sudo apt install -y git curl wget build-essential stow zsh
+            sudo apt install -y git curl wget build-essential stow zsh direnv zoxide
             ;;
         "windows")
             log_warning "Windows: Please install Git, curl, and other tools manually or via Chocolatey"
@@ -164,14 +164,15 @@ install_dev_tools() {
                 if \! command -v cargo >/dev/null 2>&1; then
                     log_info "Installing Rust..."
                     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-                    source ~/.cargo/env
+                    source $HOME/.cargo/env
                 fi
                 
                 # Build Helix from source
-                if [[ \! -d ~/helix ]]; then
-                    git clone https://github.com/helix-editor/helix ~/helix
+                if [[ \! -d $HOME/helix ]]; then
+                    git clone https://github.com/helix-editor/helix $HOME/helix
                 fi
-                cd ~/helix
+                cd $HOME/helix
+                source $HOME/.cargo/env
                 cargo install --path helix-term --locked
                 cd -
                 ;;
@@ -258,16 +259,106 @@ setup_dotfiles() {
     fi
 }
 
+# Apply configuration fixes
+apply_config_fixes() {
+    local dotfiles_dir="$1"
+    local install_helix="$2"
+    local install_wezterm="$3"
+    
+    log_info "Applying configuration fixes..."
+    
+    # Fix 1: Ensure zsh configuration is properly applied
+    if [[ -f "$dotfiles_dir/zsh/.zshrc" ]]; then
+        log_info "Fixing zsh configuration..."
+        # Check if oh-my-zsh overwrote our config
+        if [[ -f "$HOME/.zshrc" ]] && \! grep -q "ZSH_THEME=\"ys\"" "$HOME/.zshrc" 2>/dev/null; then
+            log_info "Restoring custom zsh configuration..."
+            cd "$dotfiles_dir"
+            # Restore the correct zsh config if it was overwritten
+            git checkout zsh/.zshrc 2>/dev/null || true
+            # Re-stow to ensure proper linking
+            stow -t $HOME --adopt zsh
+            git checkout zsh/.zshrc 2>/dev/null || true
+            cd -
+            log_success "Zsh configuration restored"
+        else
+            log_success "Zsh configuration already correct"
+        fi
+    fi
+    
+    # Fix 2: Fix Helix runtime symlink if Helix was installed
+    if [[ "$install_helix" == "true" ]]; then
+        log_info "Fixing Helix configuration..."
+        
+        # Check if runtime symlink exists and is correct
+        if [[ -L "$HOME/.config/helix/runtime" ]]; then
+            local current_target=$(readlink "$HOME/.config/helix/runtime")
+            local expected_target="$HOME/helix/runtime"
+            
+            if [[ "$current_target" \!= "$expected_target" ]] && [[ -d "$expected_target" ]]; then
+                log_info "Fixing Helix runtime symlink..."
+                rm "$HOME/.config/helix/runtime"
+                ln -s "$expected_target" "$HOME/.config/helix/runtime"
+                log_success "Helix runtime symlink fixed"
+            else
+                log_success "Helix runtime symlink already correct"
+            fi
+        elif [[ -d "$HOME/helix/runtime" ]]; then
+            log_info "Creating Helix runtime symlink..."
+            mkdir -p "$HOME/.config/helix"
+            ln -s "$HOME/helix/runtime" "$HOME/.config/helix/runtime"
+            log_success "Helix runtime symlink created"
+        fi
+    fi
+    
+    # Fix 3: Fix WezTerm color scheme if WezTerm was installed
+    if [[ "$install_wezterm" == "true" ]] && [[ -f "$HOME/.config/wezterm/wezterm.lua" ]]; then
+        log_info "Fixing WezTerm configuration..."
+        
+        # Check for invalid color scheme
+        if grep -q "color_scheme = 'Default dark (base16)'" "$HOME/.config/wezterm/wezterm.lua" 2>/dev/null; then
+            log_info "Fixing WezTerm color scheme..."
+            sed -i "s/config.color_scheme = 'Default dark (base16)'/config.color_scheme = 'Dracula'/" "$HOME/.config/wezterm/wezterm.lua"
+            log_success "WezTerm color scheme fixed"
+        else
+            log_success "WezTerm color scheme already correct"
+        fi
+        
+        # Fix Helix path in WezTerm config
+        if grep -q "'/usr/local/bin/hx'" "$HOME/.config/wezterm/wezterm.lua" 2>/dev/null; then
+            log_info "Fixing Helix path in WezTerm config..."
+            sed -i "s|'/usr/local/bin/hx'|'hx'|" "$HOME/.config/wezterm/wezterm.lua"
+            log_success "Helix path in WezTerm config fixed"
+        else
+            log_success "Helix path in WezTerm config already correct"
+        fi
+        
+        # Update dotfiles repo with fixes
+        if [[ -f "$dotfiles_dir/wezterm/.config/wezterm/wezterm.lua" ]]; then
+            cd "$dotfiles_dir"
+            if grep -q "color_scheme = 'Default dark (base16)'" "wezterm/.config/wezterm/wezterm.lua" 2>/dev/null; then
+                sed -i "s/config.color_scheme = 'Default dark (base16)'/config.color_scheme = 'Dracula'/" "wezterm/.config/wezterm/wezterm.lua"
+            fi
+            if grep -q "'/usr/local/bin/hx'" "wezterm/.config/wezterm/wezterm.lua" 2>/dev/null; then
+                sed -i "s|'/usr/local/bin/hx'|'hx'|" "wezterm/.config/wezterm/wezterm.lua"
+            fi
+            cd -
+        fi
+    fi
+    
+    log_success "Configuration fixes applied"
+}
+
 # Create project directories
 create_project_dirs() {
     local projects=("ucm" "plumbing")
     
     log_info "Creating project directories..."
-    mkdir -p ~/src
+    mkdir -p $HOME/src
     
     for project in "${projects[@]}"; do
-        mkdir -p ~/src/$project
-        log_success "Created ~/src/$project"
+        mkdir -p $HOME/src/$project
+        log_success "Created $HOME/src/$project"
     done
 }
 
@@ -290,7 +381,7 @@ main() {
     log_info "========================"
     
     DOTFILES_REPO=$(prompt_input "Dotfiles repository URL" "git@github.com:dheater/dotfiles.git")
-    DOTFILES_DIR=$(prompt_input "Dotfiles directory" "~/dotfiles")
+    DOTFILES_DIR=$(prompt_input "Dotfiles directory" "$HOME/dotfiles")
     DOTFILES_DIR=${DOTFILES_DIR/#~\/$HOME/} # Expand tilde
     
     INSTALL_DOCKER=$(prompt_yes_no "Install Docker?" "y")
@@ -338,17 +429,23 @@ main() {
     install_dev_tools "$OS" "$INSTALL_DOCKER" "$INSTALL_HELIX" "$INSTALL_WEZTERM"
     setup_shell "$OS" "$CHANGE_SHELL"
     setup_dotfiles "$DOTFILES_REPO" "$DOTFILES_DIR"
+    apply_config_fixes "$DOTFILES_DIR" "$INSTALL_HELIX" "$INSTALL_WEZTERM"
     create_project_dirs
     
     log_success "\n🎉 Setup complete\!"
     log_info "\nNext steps:"
     log_info "• Restart your terminal/shell"
     log_info "• Verify tools are working: hx --version, docker --version, etc."
-    log_info "• Clone your project repositories to ~/src/"
+    log_info "• Clone your project repositories to $HOME/src/"
     
     if [[ "$INSTALL_DOCKER" == "true" ]] && [[ "$OS" == "linux" ]]; then
         log_info "• Log out and back in (or run 'newgrp docker') to use Docker without sudo"
     fi
+    
+    log_info "\n🔧 Configuration fixes applied:"
+    log_info "• Zsh prompt configuration (ys theme)"
+    log_info "• Helix color scheme and runtime"
+    log_info "• WezTerm color scheme and paths"
 }
 
 # Run main function
