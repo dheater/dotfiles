@@ -19,10 +19,10 @@
 - **Sharing**: Work context can be shared with team for knowledge base
 
 ## Technology Stack
-- **Languages**: [To be discovered through work]
+- **Languages**: C++, Rust, Zig
 - **Tools**: Command-line focused, terminal-first workflow
 - **Build Systems**: Adapts to project needs (Make, Just, CMake, etc.)
-- **Version Control**: Git with conventional commit messages
+- **Version Control**: Git with conventional commit messages. Prefix commit messages with JIRA ticket number when one exists. Git branch name will match the JIRA ticket number
 
 ## Communication Preferences
 - **Status Updates**: Brief summaries of what changed and why
@@ -38,17 +38,6 @@
 
 ## User Interaction Protocols
 
-### The Tarik Protocol (formerly Wingnut)
-**Trigger**: "Invoke the Tarik protocol" when encountering compiler errors
-**Response**: Systematic debugging approach with clear action steps:
-1. **Identify the specific error** - parse compiler output carefully
-2. **Check for missing includes/declarations** - most common cause
-3. **Verify function signatures and availability** - ensure proper linking
-4. **Provide concrete fix** - show exact code changes needed
-5. **Test the solution** - verify the fix resolves the issue
-
-The Tarik Protocol represents methodical, no-nonsense approach to debugging - direct identification of the problem and immediate actionable solution.
-
 ### The Maynor Protocol
 **Trigger**: "Invoke the Maynor protocol" when AI is flailing with repeated failures
 **Purpose**: Break out of failing iteration cycles and reset approach
@@ -61,11 +50,6 @@ The Tarik Protocol represents methodical, no-nonsense approach to debugging - di
 6. **Apply subtract first principle** - remove complexity before adding solutions
 
 The Maynor Protocol is invoked when you notice AI repeatedly trying variations of the same failing approach instead of stepping back to reconsider the problem fundamentally. It forces a complete reset to simpler thinking with the subtract first principle.
-
-## Current Projects
-- Setting up AI-assisted command-line workflow
-- Developing team AI training materials
-- Building personal/work memory system for AI interactions
 
 ---
 *Last Updated: 2025-08-27*
