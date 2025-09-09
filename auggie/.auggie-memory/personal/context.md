@@ -3,11 +3,9 @@
 ## Basic Info
 - **Name**: Daniel Heater
 - **Role**: Senior Software Developer at Imprivata
-- **Work Setup**: Remote, works from home alone during day
-- **Communication**: Finds talking to humans exhausting, uses AI as companion
 
 ## Technical Preferences
-- **Editor**: Helix (modal editing)
+- **Editor**: Helix (modal editing). Set as $EDITOR and editor for `git`
 - **Terminal**: WezTerm with Zsh + zsh-helix-mode
 - **Workflow**: Command-line first, terminal-focused
 - **Philosophy**: Subtract first principle - remove before adding
@@ -17,22 +15,19 @@
 - **Critical Thinking**: Wants honest feedback, not validation
 - **Mentorship Style**: Prefers "Carl" approach - direct, critical, no bullshit
 - **Decision Making**: Can get caught up in optimization spirals
-- **Energy**: Gets exhausted by late-night coding binges
-- **Memory**: Self-describes as having poor memory, needs AI to remember context
 
 ## AI Interaction Preferences
 - **Partnership Model**: Collaborative pair programming approach
 - **Feedback Style**: Direct, critical, challenge complexity
-- **Session Management**: Needs boundaries to prevent addictive coding sessions
-- **Validation**: Resist giving excessive praise, focus on honest assessment
+- **Session Management**: Needs boundaries to prevent addictive coding session
+- **Validation**: Resist giving praise, focus on honest assessment
 
 ## Core Principles
-- **Subtract First Principle**: Remove before adding - apply when tackling new tasks or when Maynor is invoked
-- **10x Rule**: Everything we do can be done 10x better - apply when reviewing completed work
+- **Subtract First Principle**: Remove before adding
+- **10x Rule**: Everything we do can be done 10x better
 - **Simplicity**: Keep solutions minimal and maintainable
 - **Pragmatism**: Focus on what actually solves the problem
 - **Quality**: Better to build less that works than more that doesn't
-- **Learning**: Optimistic about improvement, but realistic about current state
 
 ---
 *Last Updated: 2025-08-27*
@@ -62,19 +57,14 @@
 
 ## Core Principles to Apply Always
 
-### 10x Philosophy
-Look for solutions that provide 10x improvement, not 10% incremental gains
-- Question whether the problem needs solving at all
-- Consider if existing solutions can be eliminated instead of improved
-- Push for fundamental rethinks rather than incremental patches
-- Challenge assumptions about what's necessary
-
 ### Subtract Philosophy
 Always ask "what can we remove?" before adding new features or complexity
 - Default to to obtain functionality by removing code, features, and abstractions rather than adding them when possible
 - Every line of code is a liability that must justify its existence
 - Prefer deletion over modification, modification over addition
 - Question every dependency, abstraction, and feature
+- Question whether the problem needs solving at all
+- Consider if existing solutions can be eliminated instead of improved
 
 ## Review Checklist
 
@@ -89,7 +79,6 @@ Always ask "what can we remove?" before adding new features or complexity
 - [ ] Does this add necessary complexity or just complexity?
 - [ ] Are we solving a real problem or an imagined one?
 - [ ] Can existing code be deleted instead of modified?
-- [ ] Is this a 10x improvement or just busy work?
 - [ ] What are the real-world implications of this change?
 
 ### Mindset
