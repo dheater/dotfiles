@@ -35,8 +35,6 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(
 # Fix syntax highlighting compatibility
 zhm-add-update-region-highlight-hook 2>/dev/null
 
-
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR=vi
@@ -48,8 +46,6 @@ fi
 setopt NO_CASE_GLOB
 # and make it work like bash
 setopt GLOB_COMPLETE
-
-
 
 SAVEHIST=5000
 HISTSIZE=2000
@@ -264,25 +260,8 @@ export PATH=$HOME/.cargo/bin:$HOME/.config/tmux/plugins/t-smart-tmux-session-man
 # Setup zoxide
 eval "$(zoxide init zsh)"
 
-
-
 # helix-gpt (if using)
 export HANDLER=copilot
-
-
-
-
-
-
-# Source auggie aliases if available
-if [[ -f "$DOTFILES_DIR/auggie/aliases.zsh" ]]; then
-    source "$DOTFILES_DIR/auggie/aliases.zsh"
-fi
-
-# PAS Plumbing workspace aliases
-if [ -f ~/pas/plumbing/aliases.zsh ]; then
-    source ~/pas/plumbing/aliases.zsh
-fi
 
 # CUSTOM FIX: Enhanced zsh-autosuggestions compatibility with zsh-helix-mode
 # This addresses cursor synchronization issues not yet fixed upstream
@@ -325,5 +304,8 @@ function zhm_setup_autosuggestions {
   fi
 }
 precmd_functions+=(zhm_setup_autosuggestions)
+
+# Jira CLI
+alias jmine='jira issue list -a$(jira me) -s~Done -s~Closed'
 
 export PATH="$HOME/.local/bin:$PATH"

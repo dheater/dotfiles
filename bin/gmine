@@ -1,0 +1,112 @@
+#\!/usr/bin/env bash
+#
+# gmine - Interactive GitHub PR selector
+#
+# Shows all your open PRs across all repos with merge status indicators.
+# Select a PR with fzf and open it in your browser.
+#
+# Status indicators:
+#   ✅ Ready to merge (approved + checks passed)
+#   🟡 Behind base branch
+#   🔵 Needs review
+#   ⚠️  Checks failing
+#   ❌ Merge conflicts
+#   🔴 Blocked (other reasons)
+#   📝 Draft PR
+#
+# Requirements:
+#   - gh (GitHub CLI)
+#   - fzf (fuzzy finder)
+#   - jq (JSON processor)
+
+set -euo pipefail
+
+# Check dependencies
+for cmd in gh fzf jq; do
+    if \! command -v "$cmd" &> /dev/null; then
+        echo "Error: $cmd is not installed" >&2
+        exit 1
+    fi
+done
+
+echo "Fetching your PRs..." >&2
+
+# Get all PRs
+prs=$(gh search prs --author=@me --state=open --json repository,number,title | \
+    jq -r '.[] | "\(.repository.nameWithOwner)|\(.number)|\(.title)"')
+
+if [ -z "$prs" ]; then
+    echo "No open PRs found" >&2
+    exit 0
+fi
+
+# Create temp file for formatted PRs
+temp_file=$(mktemp)
+trap "rm -f $temp_file" EXIT
+
+# Fetch merge status for each PR and format
+while IFS='|' read -r repo number title; do
+    # Fetch PR details
+    pr_data=$(gh pr view "$number" --repo "$repo" --json mergeStateStatus,mergeable,reviewDecision,isDraft 2>/dev/null)
+    
+    merge_status=$(echo "$pr_data" | jq -r '.mergeStateStatus // "UNKNOWN"')
+    mergeable=$(echo "$pr_data" | jq -r '.mergeable // "UNKNOWN"')
+    review_decision=$(echo "$pr_data" | jq -r '.reviewDecision // "PENDING"')
+    is_draft=$(echo "$pr_data" | jq -r '.isDraft // false')
+    
+    # Determine emoji and priority based on detailed status
+    status_emoji="⏳"
+    priority=5
+    
+    # Draft takes precedence
+    if [ "$is_draft" = "true" ]; then
+        status_emoji="📝"
+        priority=6
+    # Ready to merge
+    elif [ "$merge_status" = "CLEAN" ]; then
+        status_emoji="✅"
+        priority=1
+    # Has conflicts
+    elif [ "$mergeable" = "CONFLICTING" ] || [ "$merge_status" = "DIRTY" ]; then
+        status_emoji="❌"
+        priority=4
+    # Behind base branch
+    elif [ "$merge_status" = "BEHIND" ]; then
+        status_emoji="🟡"
+        priority=2
+    # Blocked - check why
+    elif [ "$merge_status" = "BLOCKED" ]; then
+        # If mergeable and just needs review, show as needs review
+        if [ "$mergeable" = "MERGEABLE" ] && [ "$review_decision" = "REVIEW_REQUIRED" ]; then
+            status_emoji="🔵"  # Needs review
+            priority=3
+        else
+            status_emoji="🔴"  # Blocked for other reasons
+            priority=5
+        fi
+    # Checks failing
+    elif [ "$merge_status" = "UNSTABLE" ]; then
+        status_emoji="⚠️"
+        priority=3
+    fi
+    
+    # Write to temp file
+    echo -e "${priority}\t${status_emoji}\t${repo}\t#${number}\t${title}" >> "$temp_file"
+done <<< "$prs"
+
+# Sort by priority and remove priority column
+sorted_prs=$(sort -n "$temp_file" | cut -f2-)
+
+# Use fzf to select
+selected=$(echo "$sorted_prs" | \
+    fzf --delimiter='\t' \
+        --with-nth=1,2,3,4 \
+        --preview 'repo=$(echo {} | cut -f2); num=$(echo {} | cut -f3 | sed "s/#//"); gh pr view $num --repo $repo' \
+        --preview-window=right:60%:wrap \
+        --header='✅=Ready 🟡=Behind 🔵=NeedsReview ⚠️=Unstable ❌=Conflicts 🔴=Blocked 📝=Draft | ESC=cancel')
+
+if [ -n "$selected" ]; then
+    repo=$(echo "$selected" | cut -f2)
+    number=$(echo "$selected" | cut -f3 | sed 's/#//')
+    gh pr view "$number" --repo "$repo" --web
+fi
