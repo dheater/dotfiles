@@ -4,3 +4,4 @@ tags
 bin/securelink*
 .ssh/
 .agent
+node_modules/
