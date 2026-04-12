@@ -19,6 +19,7 @@ fi
 # Install all dotfiles packages using stow
 echo "Installing dotfiles with stow..."
 PACKAGES=(
+    "augment"
     "fzf"
     "git"
     "ghostty"
