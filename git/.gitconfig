@@ -74,3 +74,6 @@
 
 	# Undo last commit (keep changes)
 	undo = reset --soft HEAD~1
+
+[include]
+	path = ~/.gitconfig.local

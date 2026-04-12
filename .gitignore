@@ -3,3 +3,4 @@ tags
 
 bin/securelink*
 .ssh/
+.agent

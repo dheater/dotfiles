@@ -13,10 +13,19 @@
       "projects": [
         {
           "paths": [
-            "/home/dheater/src/librssconnect/build"
+            "/home/dheater/src/librssconnect"
+          ]
+        },
+        {
+          "paths": [
+            "/home/dheater/src/universal-connection-manager"
           ]
         }
       ]
+    },
+    {
+      "host": "u",
+      "projects": []
     }
   ],
   "context_servers": {
@@ -43,10 +52,12 @@
     "model_parameters": [],
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
+      "model": "gpt-5"
     },
-    "version": "2",
     "dock": "left"
+  },
+  "terminal": {
+    "dock": "right"
   },
   "diagnostics": {
     "inline": {
