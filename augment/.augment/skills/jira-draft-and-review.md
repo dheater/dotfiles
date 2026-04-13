@@ -3,6 +3,7 @@ type: agent_requested
 name: Jira Draft and Review
 description: Draft Jira issue content locally and require approval before posting or updating Jira
 when_to_use: when preparing Jira issue text, comments, acceptance criteria, or updates that must be reviewed before posting
+model: haiku4.5
 version: 1.0.0
 prerequisites:
   - lewis

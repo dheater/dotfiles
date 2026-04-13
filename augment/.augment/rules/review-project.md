@@ -8,7 +8,7 @@
 
 ## Steps
 
-1. **Run carl checks:** `deps`, `tests`, `ABI`, `commits`, `exports`
+1. **Run project checks:** deps, tests, ABI, commits, exports
 2. **Run "review code" in analysis mode** (see review-code.md for checklist)
 3. **Generate report** with P0/P1/P2 action items
 
@@ -21,7 +21,7 @@
 
 **Grade:** A-F | **Critical:** X | **Warnings:** X
 
-## CARL Compliance
+## Rule Compliance
 | Rule | Status | Details |
 |------|--------|---------|
 | Deps (≤5) | ✅/❌ | X deps |

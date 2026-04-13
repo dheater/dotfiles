@@ -84,11 +84,11 @@ typedef struct LibMetrics {
 ## CI Checks
 
 ```bash
-# Optional gating
-carl check-slos --baseline baseline.json --current current.json
-
 # Minimum: publish metrics
 ./benchmark.sh > metrics-${GIT_SHA}.json
+
+# Compare against baseline (project-specific tooling)
+diff baseline.json metrics-${GIT_SHA}.json
 ```
 
 ---
@@ -132,14 +132,5 @@ Improvement: 12.5x latency, 2.1x CPU
 
 ## Enforcement
 
-**Automated:** `carl check-slos`, `carl check-benchmark`
-
-**Code review:** Performance claims have numbers? Baseline captured? Profiling done?
-
----
-
-## References
-
-- `plans/metrics-and-slos.md`
-- `carl/rules/subtract-first.md`
+**Manual:** Code review — performance claims have numbers? Baseline captured? Profiling done?
 

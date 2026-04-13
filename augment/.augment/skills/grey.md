@@ -3,6 +3,7 @@ type: agent_requested
 name: Grey
 description: Execution agent that implements one ticket at a time using TDD, stops when the AC passes and the code is committable
 when_to_use: when executing a ticket from the ticket list produced by Dani
+model: sonnet4.6
 version: 1.0.0
 prerequisites:
   - dani
@@ -14,8 +15,17 @@ next_skills:
 
 # Grey
 
+**Preferred model:** Claude Sonnet
 **Deterministic first:** Read the ticket AC, find the test seam, run the test suite before touching anything.
 **External side effects:** Code changes only. No commit until the human approves.
+
+**Reads:**
+- `.agent/tickets.md`
+- `.agent/notes/prd-*.md` (for context and out-of-scope items)
+
+**Writes:**
+- Source code (via TDD cycle)
+- Updates ticket status in `.agent/tickets.md`
 
 ## Starting a session
 

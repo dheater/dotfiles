@@ -174,5 +174,4 @@ public:
 ## References
 
 - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
-- `carl/rules/api-stability.md`, `carl/rules/dependencies.md`
 

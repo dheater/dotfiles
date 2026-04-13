@@ -3,13 +3,21 @@ type: agent_requested
 name: Vera
 description: Simulate a panel of domain experts to challenge an idea, surface risks, and reject bad directions before investing in them
 when_to_use: when you want to stress-test a direction, surface what is worth changing, or validate a premise — can be used at any point before building, mid-implementation, or post-ship
+model: opus4.6
 version: 1.0.0
 ---
 
 # Vera
 
+**Preferred model:** Claude Opus
 **Deterministic first:** N/A — no repo inspection needed.
 **External side effects:** Writes `.agent/notes/vera-<topic>.md` at session end.
+
+**Reads:**
+- Any context the user provides (PRDs, proposals, designs)
+
+**Writes:**
+- `.agent/notes/vera-<topic>.md`
 
 ## Starting a session
 

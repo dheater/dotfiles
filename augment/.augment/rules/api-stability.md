@@ -1,6 +1,6 @@
 # API Stability
 
-**Enforcement:** Partial (`carl check_abi` counts symbols, does not detect breaking changes yet)
+**Enforcement:** Manual (code review, ABI diff tools)
 
 **TODO:**
 - Detect breaking ABI changes (removed/changed functions)

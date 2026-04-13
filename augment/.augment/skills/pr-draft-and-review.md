@@ -3,6 +3,7 @@ type: agent_requested
 name: PR Draft and Review
 description: Draft PR contents from the actual diff and require approval before creating or updating a pull request
 when_to_use: when preparing a PR title, body, summary, or major PR update that must be reviewed before posting
+model: haiku4.5
 version: 1.0.0
 prerequisites:
   - lewis

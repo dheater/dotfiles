@@ -1,6 +1,6 @@
 # Code Review
 
-**Trigger:** "review code" or "carl review"
+**Trigger:** "review code"
 
 **Modes:**
 - **Interactive** (user says "review code"): Review → wait for approval → make changes

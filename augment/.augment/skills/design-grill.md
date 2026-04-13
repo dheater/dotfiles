@@ -3,6 +3,7 @@ type: agent_requested
 name: Design Grill
 description: Stress-test a feature, bugfix, or refactor one hard question at a time before writing plans or code
 when_to_use: when the problem is partly understood but key design decisions still need to be clarified before writing a PRD, plan, or implementation
+model: opus4.6
 version: 1.0.0
 next_skills:
   - write-a-prd

@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+# Generate QA plan from tickets and handle housekeeping
+exec auggie --model haiku4.5 -i "Follow the lewis-qa skill." "$@"

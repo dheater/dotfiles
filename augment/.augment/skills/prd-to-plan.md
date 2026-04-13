@@ -3,6 +3,7 @@ type: agent_requested
 name: PRD to Plan
 description: Convert a PRD into thin vertical slices with deterministic verification and explicit approval gates
 when_to_use: when a PRD exists and the next step is an implementation plan before coding or ticket creation
+model: gemini3.1pro
 version: 1.0.0
 prerequisites:
   - write-a-prd
@@ -12,7 +13,7 @@ next_skills:
 
 # PRD to Plan
 
-**Preferred model:** Claude Opus
+**Preferred model:** Gemini 3.1 Pro
 **Deterministic first:** Read the PRD, inspect the repo, find existing test seams and verification commands.
 **External side effects:** None
 

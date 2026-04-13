@@ -101,14 +101,5 @@ fn connectWithRetry(host: []const u8, max_attempts: u32) !Connection {
 
 ## Enforcement
 
-**Automated:** `carl check-error-codes`, `carl lint-errors`
-
-**Code review:** Errors helpful? Teach? Can fix without reading source?
-
----
-
-## References
-
-- `plans/native-c-api-stability-plan.md`
-- `carl/rules/subtract-first.md`
+**Manual:** Code review — errors helpful? Teach? Can fix without reading source?
 

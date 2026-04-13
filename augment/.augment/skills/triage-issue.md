@@ -3,6 +3,7 @@ type: agent_requested
 name: Triage Issue
 description: Investigate a bug to root cause and produce a fix plan before implementation
 when_to_use: when a bug, regression, or unexpected behavior is reported and root cause plus a fix plan are needed before coding
+model: gemini3.1pro
 version: 1.0.0
 next_skills:
   - tdd-vertical-slices
@@ -10,7 +11,7 @@ next_skills:
 
 # Triage Issue
 
-**Preferred model:** Claude Opus
+**Preferred model:** Gemini 3.1 Pro
 **Deterministic first:** Reproduce or inspect the failure, read the code path, inspect tests, run the failing commands when possible.
 **External side effects:** None by default
 

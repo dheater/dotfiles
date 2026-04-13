@@ -165,12 +165,6 @@ Two-plane design:
 
 ## Enforcement
 
-**Automated (limited):**
-- `carl check_docs` - Detects new .md files in uncommitted changes
-  - Only checks git diff (not overall doc quality)
-  - Can't assess if docs are overwhelming or helpful
-  - Use as indicator for "did AI create unsolicited docs"
-
 **AI Review (recommended):**
 - Trigger: "review project" or "review code" prompt
 - AI can assess:

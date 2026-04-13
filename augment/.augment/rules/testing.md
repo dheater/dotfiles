@@ -1,6 +1,6 @@
 # Testing
 
-**Enforcement:** ✅ Automated (`carl check_tests` detects test file presence)
+**Enforcement:** Manual (code review)
 
 **TODO:**
 - Detect missing tests for new features (new functions without tests)
@@ -125,17 +125,5 @@ test "base64 round-trip" {
 
 ## Enforcement
 
-**Automated:**
-- `carl check_tests` - Detect test file presence (FAIL if 0 test files)
-- `carl check-ci-config` - Verify sanitizers in CI (TODO)
-- `carl check-fuzz-coverage` - Verify fuzz targets (TODO)
-
-**Code review:** Tests added? Sanitizers enabled? Fuzz targets for parsers?
-
----
-
-## References
-
-- `plans/native-c-api-stability-plan.md`
-- `carl/rules/api-stability.md`
+**Manual:** Code review — tests added? Sanitizers enabled? Fuzz targets for parsers?
 

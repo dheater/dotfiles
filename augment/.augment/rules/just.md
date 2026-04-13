@@ -126,5 +126,4 @@ Environment variable?
 ## References
 
 - [Just Manual](https://just.systems/man/en/)
-- `carl/rules/subtract-first.md`
 

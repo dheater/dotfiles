@@ -1,6 +1,6 @@
 # Comments
 
-**Enforcement:** ⚠️ Partial automation (`carl check_comments` has false positives - use AI review instead)
+**Enforcement:** Manual (AI review recommended)
 
 ## Principle
 
@@ -134,12 +134,6 @@ int client_connect(const char* server_url, uint32_t timeout_ms);
 ---
 
 ## Enforcement
-
-**Automated (limited, has false positives):**
-- `carl check_comments` - Detects obvious narration patterns
-  - Simple patterns like "// Loop through", "// Increment"
-  - **High false positive rate** - catches acceptable comments
-  - Use as a rough indicator only
 
 **AI Review (recommended):**
 - Trigger: "review code" prompt

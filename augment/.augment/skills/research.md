@@ -3,6 +3,7 @@ type: agent_requested
 name: Research
 description: Fetch, summarize, and cache external context that the agent cannot easily rediscover in a fresh context window
 when_to_use: when the work depends on external APIs, uncommon libraries, or hard-to-explore context that would slow or derail each execution phase
+model: gemini3.1pro
 version: 1.0.0
 next_skills:
   - prototype
@@ -11,7 +12,7 @@ next_skills:
 
 # Research
 
-**Preferred model:** Claude Opus
+**Preferred model:** Gemini 3.1 Pro
 **Deterministic first:** Fetch real docs with `md-fetch` or `auggie web-fetch`. Do not summarize from memory.
 **External side effects:** None — research is read-only until the user approves saving it.
 

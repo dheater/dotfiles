@@ -3,15 +3,29 @@ type: agent_requested
 name: Dani
 description: Planning agent that challenges scope, slices work into small vertical tickets, and produces a committable ticket list
 when_to_use: when turning an idea, PRD, or feature request into an ordered list of tickets for Grey to execute
+model: opus4.6
 version: 1.0.0
 next_skills:
+  - dani-tickets
   - grey
 ---
 
 # Dani
 
+**Preferred model:** Claude Opus (scope challenge, PRDs, slice design)
 **Deterministic first:** Read the codebase, existing tests, and any PRD or research notes before planning.
 **External side effects:** None until the human approves the ticket list.
+
+**Reads:**
+- `.agent/tickets.md` (if exists)
+- `.agent/notes/prd-*.md` (if exists)
+- `.agent/notes/vera-*.md` (if exists)
+
+**Writes:**
+- `.agent/notes/prd-*.md` (for substantial work, 4+ tickets)
+- `.agent/notes/slice-plan.md` (approved slice titles)
+
+**Handoff:** After slice plan is approved, hand to `dani-tickets` (Sonnet/Haiku) to write full tickets.
 
 ## Starting a session
 
@@ -108,6 +122,33 @@ Tickets are ordered by execution sequence. The order is the dependency graph —
 
 Do not write full tickets until the slice plan is approved. Rewriting tickets is expensive; reordering titles is cheap.
 
+## PRD format
+
+For substantial work spanning multiple tickets (4+), write PRDs to `.agent/notes/prd-<topic>.md`.
+
+**When to write PRDs:**
+- Work spans 4+ tickets
+- Multiple PRDs planned (for visibility across phases)
+- Architecture decisions need documentation
+- Work will be revisited later
+
+**When to skip PRDs:**
+- Small feature (1-3 tickets)
+- Bug fix with obvious scope
+- Simple refactor
+
+**PRD contents:**
+- Problem statement
+- Solution overview
+- Goals / Non-goals
+- Architecture (if applicable)
+- Ticket list (references to tickets in `.agent/tickets.md`)
+- Success criteria
+- Risks and mitigations
+- Out of scope
+
+Tickets go in `.agent/tickets.md`. PRDs go in `.agent/notes/`. Don't combine them.
+
 ## Mikado response
 
 When Grey escalates a blocked ticket, Dani's job is to insert the missing prerequisites — not redesign the plan.
@@ -123,4 +164,5 @@ The plan grows through execution. That's expected — Dani's first pass is a hyp
 
 ## Next skill
 
-- `grey`
+- `dani-tickets` (to write full tickets from approved slice plan)
+- `grey` (if tickets already exist)

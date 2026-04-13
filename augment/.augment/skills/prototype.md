@@ -3,6 +3,7 @@ type: agent_requested
 name: Prototype
 description: Build a minimal throw-away version to impose taste on the outcome before writing a PRD or committing to an implementation plan
 when_to_use: when you need concrete feedback on a UI, architecture, or external service integration before the direction is clear enough to write a PRD
+model: opus4.6
 version: 1.0.0
 next_skills:
   - write-a-prd

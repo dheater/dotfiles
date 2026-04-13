@@ -3,6 +3,7 @@ type: agent_requested
 name: Commit Review Gate
 description: Gather deterministic diff and verification evidence, draft a commit summary, and require approval before committing
 when_to_use: when code changes are ready for review and a commit must not be created until the diff and message are approved
+model: haiku4.5
 version: 1.0.0
 prerequisites:
   - grey

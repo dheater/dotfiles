@@ -3,6 +3,7 @@ type: agent_requested
 name: Write a PRD
 description: Turn a clarified problem into a durable PRD focused on behavior, decisions, and testing intent
 when_to_use: when the problem and direction are understood and the user wants a durable requirements document before implementation
+model: opus4.6
 version: 1.0.0
 next_skills:
   - prd-to-plan

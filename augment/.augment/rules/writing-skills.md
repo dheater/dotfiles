@@ -1,14 +1,14 @@
-# Writing Carl Rules
+# Writing Rules
 
 **Enforcement:** Guideline for rule authors (not enforced on projects)
 
-**Purpose:** How to write effective Carl rules. This rule is dogfooded - it follows its own guidelines.
+**Purpose:** How to write effective rules. This rule is dogfooded - it follows its own guidelines.
 
 ---
 
 ## Structure
 
-Every Carl rule follows this structure:
+Every rule follows this structure:
 
 ```markdown
 # Rule Name
@@ -77,7 +77,7 @@ Every Carl rule follows this structure:
 - [ ] Is this add-only?
 - [ ] Are defaults unchanged?
 - [ ] Incompatible? Bump major version (rare, clean break)
-- [ ] Run: `carl check_abi`
+- [ ] Run ABI diff tools (abidiff, nm, etc.)
 ```
 
 ### Decision Trees (for choosing between options)
@@ -149,7 +149,7 @@ When a tool detects a violation, output should teach:
   "rationale": "Why this matters",
   "suggestion": "How to fix it (actionable)",
   "details": { ... },
-  "references": ["~/.carl/rules/X.md"]
+  "references": ["rules/X.md"]
 }
 ```
 
@@ -190,8 +190,8 @@ When a tool detects a violation, output should teach:
 **Bad rule (too long, exhaustive):**
 > [500 lines covering every possible dependency scenario]
 
-**Good rule (principle + tool):**
-> [50 lines covering principle, examples, enforcement via `carl check-deps`]
+**Good rule (principle + enforcement):**
+> [50 lines covering principle, examples, enforcement approach]
 
 ---
 
@@ -216,7 +216,7 @@ When a tool detects a violation, output should teach:
 ## This Rule is Dogfooded
 
 This rule follows its own structure:
-- ✅ Principle: How to write Carl rules
+- ✅ Principle: How to write rules
 - ✅ Why: Consistency, token-efficiency, enforceability
 - ✅ Examples: Good/bad rule examples
 - ✅ Enforcement: Self-review checklist

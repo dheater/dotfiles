@@ -168,5 +168,4 @@ defer allocator.free(address_z);
 ## References
 
 - [Zig 0.15.1 Docs](https://ziglang.org/documentation/0.15.1/)
-- `carl/rules/subtract-first.md`
 

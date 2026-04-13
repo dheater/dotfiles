@@ -2,7 +2,7 @@
 
 **Enforcement:** Guideline (not enforced - context-dependent)
 
-**What `carl check_deps` detects:**
+**How to check dependencies:**
 - CMake: `find_package()` calls in CMakeLists.txt
 - Zig: `build.zig.zon` dependencies + `exe.linkSystemLibrary()`
 - Rust: `[dependencies]` and `[build-dependencies]` in Cargo.toml
@@ -120,15 +120,5 @@ rm -rf ~/.cache
 
 ## Enforcement
 
-**Automated:** `carl check_deps`, `carl check_offline_build` (not yet implemented)
-
-**Code review:** Dependency justified? Alternatives considered? One-pager for seams? Budget respected?
-
----
-
-## References
-
-- `plans/dependencies-and-seams-charter.md`
-- `carl/rules/subtract-first.md`
-- `carl/rules/api-stability.md`
+**Manual:** Code review — dependency justified? Alternatives considered? One-pager for seams? Budget respected?
 

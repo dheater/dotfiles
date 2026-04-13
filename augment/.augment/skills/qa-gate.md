@@ -3,6 +3,7 @@ type: agent_requested
 name: QA Gate
 description: Run deterministic verification, assemble evidence, and pause for approval before declaring work complete
 when_to_use: when implementation appears done and explicit verification plus human review are needed before completion
+model: sonnet4.6
 version: 1.0.0
 prerequisites:
   - grey

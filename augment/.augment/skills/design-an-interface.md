@@ -3,6 +3,7 @@ type: agent_requested
 name: Design an Interface
 description: Generate multiple radically different interface designs, compare them, and recommend one
 when_to_use: when designing or reshaping an API, module boundary, callback surface, or service contract before implementation
+model: opus4.6
 version: 1.0.0
 next_skills:
   - write-a-prd

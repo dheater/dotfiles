@@ -51,7 +51,7 @@ Broad, boring compatibility. Target stable platform APIs. Use runtime feature de
 |----------------|--------|-----------|
 | **TLS/Crypto** | Dynamic link to system libs | Security updates, FIPS compliance |
 | **UI** | Follow platform best practices | Platform-specific |
-| **Other** | Follow dependency budget | See `carl/rules/dependencies.md` |
+| **Other** | Follow dependency budget | See dependencies.md |
 
 ---
 
@@ -97,15 +97,5 @@ int lib_get_capabilities(LibCaps* caps);
 
 ## Enforcement
 
-**Automated:** `carl check-glibc-compat`, `carl check-offline-build`, `carl ci-matrix`
-
-**Code review:** Platform-specific code justified? Feature detection used? Toolchain pinned?
-
----
-
-## References
-
-- `plans/portability-and-platform-stability.md`
-- `carl/rules/dependencies.md`
-- `carl/rules/api-stability.md`
+**Manual:** Code review — platform-specific code justified? Feature detection used? Toolchain pinned?
 

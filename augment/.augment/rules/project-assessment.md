@@ -28,7 +28,7 @@ Just know that it will be slower.
 **Use these, not SLOC:**
 
 1. **API surface:** ≤50 public symbols (≤20 for libraries)
-2. **Dependencies:** ≤5 runtime deps (`carl check_deps`)
+2. **Dependencies:** ≤5 runtime deps
 3. **Modules:** ≤10 files
 4. **External interfaces:** ≤3 external systems
 5. **Finished criteria:** Can write in ≤5 bullets?
@@ -143,7 +143,7 @@ Month 3: DEADLINE
 ### Month 3 Review (DEADLINE)
 
 - [ ] Component DONE (stable API + working + tests pass)
-- [ ] `carl check_all` passes
+- [ ] Tests pass
 - [ ] Sanitizers pass
 - [ ] Documentation complete
 
@@ -156,7 +156,6 @@ Month 3: DEADLINE
 - [ ] Stable API (documented, backward compatible)
 - [ ] Working implementation (tests pass)
 - [ ] Sanitizers pass (ASan, UBSan, TSan)
-- [ ] `carl check_all` passes
 - [ ] Documentation complete
 
 ### Kill Decision Checklist
@@ -168,20 +167,18 @@ Month 3: DEADLINE
 
 **If 3+ YES → Kill it. Salvage learnings.**
 
-## Integration with Carl
+## Verification
 
-**During planning:** Use planning-phase metrics (no automated checks)
+**During planning:** Use planning-phase metrics
 
 **During implementation:**
-```bash
-carl check_deps      # ≤5 runtime dependencies
-carl check_abi       # No breaking changes
-carl check_all       # Run all checks
-```
+- Count dependencies (≤5 runtime)
+- Check for ABI breaks (abidiff, nm)
+- Run test suite
 
 **Before "finished":**
 ```bash
-carl check_all
+just test
 zig build test -Dsanitize=address,undefined,thread
 ```
 

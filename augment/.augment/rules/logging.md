@@ -1,6 +1,6 @@
 # Logging
 
-**Enforcement:** ✅ Automated (`carl check_logs` detects unstructured logging, skips trace patterns like std.debug.print)
+**Enforcement:** Manual (code review)
 
 ## Principle
 
@@ -140,13 +140,5 @@ awk '/^[A-Z_]+$/ {print}' logs.txt | sort | uniq -c
 
 ## Enforcement
 
-**Automated:** `carl lint-logs`, check for unstructured errors
-
-**Code review:** Structured format? Success minimal? Data plane uses trace?
-
----
-
-## References
-
-- `carl/rules/helpful-errors.md`
+**Manual:** Code review — structured format? Success minimal? Data plane uses trace?
 
