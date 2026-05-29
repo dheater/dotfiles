@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-# Fetch and summarize external context before planning
-exec auggie --model gemini3.1pro -i "Follow the research skill." "$@"

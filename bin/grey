@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-# Execute the next ticket from .carl/tickets.md
-exec auggie --model gemini-3.1-pro-preview -i "Follow the grey skill." "$@"
