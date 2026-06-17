@@ -74,6 +74,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 alias ls='ls --color'
+alias dotcfg='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
 
 # Path - dynamically determine dotfiles location
 if [[ -L "${(%):-%N}" ]]; then
