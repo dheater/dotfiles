@@ -75,6 +75,7 @@ fi
 
 alias ls='ls --color'
 alias dotcfg='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
+alias bright='sudo tee /sys/class/backlight/*/brightness <<<'
 
 # Path - dynamically determine dotfiles location
 if [[ -L "${(%):-%N}" ]]; then
