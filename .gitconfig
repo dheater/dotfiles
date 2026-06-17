@@ -89,3 +89,6 @@
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [url "git@github.com-daniel-heater-imprivata:imprivata-pas/"]
 	insteadOf = git@github.com:imprivata-pas/
+[user]
+	email = dheater@pm.me
+	name = Daniel Heater
