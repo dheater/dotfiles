@@ -36,7 +36,6 @@ vim.opt.termguicolors = true
 vim.opt.completeopt = "menuone,noselect,fuzzy,nosort"
 vim.opt.shortmess:append("c")
 
--- FIXME: Not working
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Hightlight when yanking text",
     callback = function()
