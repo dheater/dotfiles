@@ -77,22 +77,6 @@ alias ls='ls --color'
 alias dotcfg='git --git-dir=$HOME/.cfg/ --work-tree=$HOME' 
 alias bright='sudo tee /sys/class/backlight/*/brightness <<<'
 
-# Path - dynamically determine dotfiles location
-if [[ -L "${(%):-%N}" ]]; then
-    # If .zshrc is a symlink (stow-managed), resolve dotfiles location
-    DOTFILES_DIR="$HOME/$(dirname "$(dirname "$(readlink "${(%):-%N}")")")"
-else
-    # Fallback to common locations
-    if [[ -d "$HOME/dotfiles" ]]; then
-        DOTFILES_DIR="$HOME/dotfiles"
-    elif [[ -d "$HOME/src/dheater/main/dotfiles" ]]; then
-        DOTFILES_DIR="$HOME/src/dheater/main/dotfiles"
-    else
-        DOTFILES_DIR="$HOME/dotfiles"  # Default fallback
-    fi
-fi
-export PATH=$PATH:$HOME/bin:$DOTFILES_DIR/bin:/usr/local/sbin:$HOME/zig:/opt/bin:/opt/nvim:/usr/local/go/bin
-
 # Git autocomplete
 autoload -Uz compinit && compinit
 
@@ -261,9 +245,6 @@ export PATH=$HOME/.cargo/bin:$HOME/.config/tmux/plugins/t-smart-tmux-session-man
 
 # Setup zoxide
 eval "$(zoxide init zsh)"
-
-# Jira CLI
-alias jmine='jira issue list -a$(jira me) -s~Done -s~Closed'
 
 export PATH="$HOME/.local/bin:$PATH"
 
