@@ -14,7 +14,7 @@ source $ZSH/oh-my-zsh.sh
 # Load additional plugins
 source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-source ~/.oh-my-zsh/custom/plugins/zsh-helix-mode/zsh-helix-mode.plugin.zsh 2>/dev/null
+#source ~/.oh-my-zsh/custom/plugins/zsh-helix-mode/zsh-helix-mode.plugin.zsh 2>/dev/null
 
 # Configure zsh-autosuggestions compatibility with zsh-helix-mode
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
@@ -39,7 +39,7 @@ zhm-add-update-region-highlight-hook 2>/dev/null
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR=vi
 else
-  export EDITOR=hx
+  export EDITOR=nvim
 fi
 
 # Make globbing case insenstive
@@ -262,64 +262,8 @@ export PATH=$HOME/.cargo/bin:$HOME/.config/tmux/plugins/t-smart-tmux-session-man
 # Setup zoxide
 eval "$(zoxide init zsh)"
 
-# helix-gpt (if using)
-export HANDLER=copilot
-
-# CUSTOM FIX: Enhanced zsh-autosuggestions compatibility with zsh-helix-mode
-# This addresses cursor synchronization issues not yet fixed upstream
-# See: https://github.com/Multirious/zsh-helix-mode/issues/31
-# The helix mode plugin interferes with autosuggestion cursor positioning
-function zhm_autosuggest_accept {
-  local suggestion=""
-
-  # Get suggestion using the history strategy
-  if (( $+functions[_zsh_autosuggest_strategy_history] )); then
-    _zsh_autosuggest_strategy_history "$BUFFER"
-  fi
-
-  if [[ -n "$suggestion" ]]; then
-    # Accept the suggestion by updating buffer and cursor
-    BUFFER="$suggestion"
-    CURSOR=${#BUFFER}
-
-    # Sync helix mode cursor tracking
-    if (( $+zhm_cursors_pos )); then
-      zhm_cursors_pos[${ZHM_PRIMARY_CURSOR_IDX:-1}]=$CURSOR
-      zhm_cursors_selection_left[${ZHM_PRIMARY_CURSOR_IDX:-1}]=$CURSOR
-      zhm_cursors_selection_right[${ZHM_PRIMARY_CURSOR_IDX:-1}]=$CURSOR
-      (( $+functions[__zhm_update_last_moved] )) && __zhm_update_last_moved
-      (( $+functions[__zhm_update_region_highlight] )) && __zhm_update_region_highlight
-    fi
-  else
-    # No suggestion, just move forward one character
-    zle forward-char
-  fi
-}
-zle -N zhm_autosuggest_accept
-
-# Apply the fix after helix mode loads
-function zhm_setup_autosuggestions {
-  if (( $+functions[zhm_insert] )); then
-    bindkey -M hxins "^[OC" zhm_autosuggest_accept  # Right arrow
-    bindkey -M hxins "^[[C" zhm_autosuggest_accept  # Right arrow (alternate)
-    precmd_functions=(${precmd_functions:#zhm_setup_autosuggestions})
-  fi
-}
-precmd_functions+=(zhm_setup_autosuggestions)
-
 # Jira CLI
 alias jmine='jira issue list -a$(jira me) -s~Done -s~Closed'
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# bun completions
-[ -s "/Users/dheater/.bun/_bun" ] && source "/Users/dheater/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# bun
-#   export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
