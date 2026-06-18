@@ -17,7 +17,7 @@ require("mason-lspconfig").setup({
         "ols",
         "zls",
         "jsonls",
-        "java_languae_server",
+        "java_language_server",
         "pyright",
         "html",
     }
