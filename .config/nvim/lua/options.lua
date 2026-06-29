@@ -8,7 +8,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.smartindent = true
 vim.opt.inccommand = "split"
 
@@ -24,7 +24,6 @@ vim.opt.backup = false
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
 vim.opt.undofile = false
 
--- vim.opt.clipboard:append("unnamedplus")
 vim.opt.isfname:append("@-@")
 vim.opt.scrolloff = 8
 
@@ -36,11 +35,12 @@ vim.opt.termguicolors = true
 vim.opt.completeopt = "menuone,noselect,fuzzy,nosort"
 vim.opt.shortmess:append("c")
 
+vim.opt.makeprg="just"
+
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Hightlight when yanking text",
     callback = function()
         vim.hl.on_yank()
     end,
 })
-
 
