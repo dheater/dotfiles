@@ -12,17 +12,27 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "move lines up in visual s
 vim.keymap.set("v", "<", "<gv", { desc = "Unindent amd keep selection" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent amd keep selection" })
 
+vim.keymap.set("v", "<leader>s", function()
+	local lines = vim.fn.getline("'<", "'>")
+	vim.cmd("enew")
+	vim.bo.buftype = "nofile"
+	vim.bo.bufhidden = "hide"
+	vim.bo.swapfile = false
+	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+end, { desc = "Open selection in scratch buffer" })
+
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result is centered" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result is centered" })
 
--- Auto-close
-vim.keymap.set("i", "'", "''<left>")
+-- Autopair
 vim.keymap.set("i", "\"", "\"\"<left>")
 vim.keymap.set("i", "(", "()<left>")
 vim.keymap.set("i", "{", "{}<left>")
 vim.keymap.set("i", "[", "[]<left>")
-vim.keymap.set("i", "(;", "();<left><left>")
 vim.keymap.set("i", "\",", "\"\",<left><left>")
+vim.keymap.set("i", "(,", "(),<left><left>")
+vim.keymap.set("i", "(;", "();<left><left>")
+vim.keymap.set("i", "{,", "{},<left><left>")
 vim.keymap.set("i", "/*", "/**/<left><left>")
 
 vim.keymap.set("n", "<leader>u", function()

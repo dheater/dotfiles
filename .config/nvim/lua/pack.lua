@@ -62,8 +62,6 @@ require("mini.diff").setup({
     mappings = {
         apply = "<leader>ga",
         reset = "<leader>gr",
-        goto_first = "<leader>gg",
-        goto_last = "<leader>gG",
         goto_next = "<leader>gn",
         goto_prev = "<leader>gp",
     }
@@ -109,7 +107,6 @@ vim.cmd([[au FileType snacks_picker_input lua vim.b.minicompletion_disable = tru
 vim.keymap.set("n", "<Leader>f", function() Snacks.picker.files() end, { desc = "Find files" })
 vim.keymap.set("n", "<Leader>b", function()
     Snacks.picker.buffers()
-    vim.cmd.stopinsert()
 end, { desc = "Show buffers" })
 vim.keymap.set("n", "<Leader>g", function() Snacks.picker.grep() end, { desc = "grep" })
 vim.keymap.set("n", "<Leader>k", function() Snacks.picker.keymaps() end, { desc = "Show keymaps" })
@@ -128,7 +125,10 @@ vim.keymap.set({ "n", "t" }, "<C-t>", function() Snacks.terminal.toggle() end, {
 vim.keymap.set("n", "<leader>gb", function() Snacks.picker.git_branches() end, { desc = "Git Branches" })
 vim.keymap.set("n", "<leader>gl", function() Snacks.picker.git_log() end, { desc = "Git Log" })
 vim.keymap.set("n", "<leader>gL", function() Snacks.picker.git_log_line() end, { desc = "Git Log Line" })
-vim.keymap.set("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gs", function()
+    Snacks.picker.git_status()
+    vim.cmd.stopinsert()
+end, { desc = "Git Status" })
 vim.keymap.set("n", "<leader>gS", function() Snacks.picker.git_stash() end, { desc = "Git Stash" })
 vim.keymap.set("n", "<leader>gd", function() Snacks.picker.git_diff() end, { desc = "Git Diff (Hunks)" })
 vim.keymap.set("n", "<leader>gf", function() Snacks.picker.git_log_file() end, { desc = "Git Log File" })
