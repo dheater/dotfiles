@@ -73,8 +73,14 @@ if [ -x /usr/bin/dircolors ]; then
   alias grep='grep --color=auto'
 fi
 
+# Used to create a worktree outside of the repo
+# usage: wit <local clone> <destdir> <git command (st, add, etc)>
+wit() { git --git-dir="$1" --work-tree="$2" "${@:3}"; }
+# This is how I manage my dotfiles - in a bare repo
+alias dotcfg='wit $HOME/.dot $HOME' 
+#alias dotcfg='git --git-dir=$HOME/.cfg/ --work-tree=$HOME' 
+
 alias ls='ls --color'
-alias dotcfg='git --git-dir=$HOME/.cfg/ --work-tree=$HOME' 
 alias bright='sudo tee /sys/class/backlight/*/brightness <<<'
 
 # Git autocomplete
